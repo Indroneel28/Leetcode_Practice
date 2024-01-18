@@ -14,6 +14,7 @@
  * }
  */
 class Solution {
+    
     public int count;
     public int countNodes(TreeNode root) {
         if (root==null)
