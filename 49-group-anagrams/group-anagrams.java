@@ -13,6 +13,9 @@ class Solution {
                 hashMap.get(str).add(strs[i]);
             }
         }
-        return new ArrayList<>(hashMap.values());
+
+        List<List<String>> result= new ArrayList<>();
+        result.addAll(hashMap.values()); //Will add all the values List<String> in result
+        return result;
     }
 }
