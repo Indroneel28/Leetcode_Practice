@@ -1,20 +1,15 @@
 class Solution {
     public int findJudge(int n, int[][] trust) {
-        HashSet<Integer> hashSet= new HashSet<>();
-        for (int i=1; i<=n; i++)
-            hashSet.add(i);
+        //USING ARRAY
+        int[][] store= new int[n+1][2];
         for (int i=0; i<trust.length; i++){
-            hashSet.remove(trust[i][0]);
+            store[trust[i][0]][0]++;
+            store[trust[i][1]][1]++;
         }
-        if (hashSet.size()==1){
-            int judge= (int) (hashSet.toArray()[0]);
-            HashSet<Integer> list= new HashSet<>();
-            for (int i=0; i<trust.length; i++){
-                if (trust[i][1]== judge)
-                    list.add(trust[i][0]);
-            }
-            if (list.size()==n-1)
-                return judge;
+        //Ignore index 0 coz 1 to n given in question
+        for (int i=1; i<store.length; i++){
+            if (store[i][0]==0 && store[i][1]==n-1)
+                return i;
         }
         return -1;
     }
