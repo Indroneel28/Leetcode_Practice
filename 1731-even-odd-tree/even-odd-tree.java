@@ -35,20 +35,16 @@ class Solution {
                 if (node.right!=null){
                     queue.add(node.right);
                 }
-                if (levelEven){
-                    if (node.val%2==0)
-                        return false;
-                    if (store>=node.val){
+                if (levelEven){ //Even level must contain odd integers in strictly increasing order
+                    if (node.val%2==0 || store>=node.val){
                         return false;
                     }
                     else if (node.val>store){
                         store= node.val;
                     }
                 }
-                else {
-                    if (node.val%2==1)
-                        return false;
-                    if (store<=node.val){
+                else { //Odd level must contain even integers in strictly decreasing order
+                    if (node.val%2==1 || store<=node.val){
                         return false;
                     }
                     else if (node.val<store){
