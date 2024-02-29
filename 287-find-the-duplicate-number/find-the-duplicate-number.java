@@ -11,13 +11,30 @@ class Solution {
          */
 
         //METHOD 2:- BY USING ARRAY
+        //BEATS 100%
+        /*
         int[] arr= new int[nums.length];
         for (int num: nums){
             if (arr[num]==0) //If it's 0 means we approach
                 arr[num]= 1;
-            else 
+            else
                 return num; //arr[num]=1 means it's duplicate
         }
         return nums.length;
+         */
+
+        //METHOD 3:- TC: O(N), SC: O(N)
+        int slow= 0, fast= 0;
+        do{
+            slow= nums[slow];
+            fast= nums[nums[fast]];
+        }while (slow!=fast);
+
+        slow= 0;
+        while (slow!=fast){
+            slow= nums[slow];
+            fast= nums[fast];
+        }
+        return slow;
     }
 }
