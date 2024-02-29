@@ -45,10 +45,12 @@ class Solution {
         //TIME COMPLEXITY:- O(N) because all nodes are visited once
 
         //METHOD 2:-
-        if (root==null)
-            return new LinkedList<>();
-        Queue<TreeNode> queue= new LinkedList<>();
+
         List<List<Integer>> answer= new ArrayList<>();
+        if (root==null)
+            return answer;
+        
+        Queue<TreeNode> queue= new LinkedList<>();
 
         queue.add(root);
         while (!queue.isEmpty()){
