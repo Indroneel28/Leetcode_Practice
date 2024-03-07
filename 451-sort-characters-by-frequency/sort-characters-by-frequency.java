@@ -1,25 +1,26 @@
 class Solution {
     public String frequencySort(String s) {
-        //APPROACH:- We will use HashMap data structure
-        HashMap<Character, Integer> hashMap= new HashMap<>();
+        //METHOD 2:- USING ARRAY
+        int[] arr= new int[128];
         for (int i=0; i<s.length(); i++){
-            char c= s.charAt(i);
-            hashMap.put(c,hashMap.getOrDefault(c,0)+1);
+            int c= s.charAt(i);
+            arr[c]++;
         }
-        
         String answer="";
-        while (!hashMap.isEmpty()){
-            char c='0'; int frequency= 0;
-            for (char key: hashMap.keySet()){
-                if (hashMap.get(key)>frequency){
-                    c= key;
-                    frequency= hashMap.get(key);
+        while (true){
+            int count= 0, index=0;
+            //Finding character having max frequency
+            for (int i=0; i<arr.length; i++){
+                if (arr[i]>count) {
+                    count = arr[i];
+                    index= i;
                 }
             }
-            for (int i=1; i<=frequency; i++){
-                answer+=c;
-            }
-            hashMap.remove(c);
+            if (count==0) //All conditions executed
+                break;
+            arr[index]= 0;
+            for (int i=1; i<=count; i++)
+                answer+=(char)(index);
         }
         return answer;
     }
