@@ -14,15 +14,13 @@
  * }
  */
 class Solution {
-    public static int total= 0;
+    public int total= 0;
     public int sumNumbers(TreeNode root) {
-       traverse(root,0);
-        int ans= total;
-        total= 0;
-        return ans;
+        traverse(root,0);
+        return total;
     }
 
-    public static void traverse(TreeNode root, int sum){
+    public void traverse(TreeNode root, int sum){
         if (root==null)
             return;
         sum= sum*10 + root.val;
