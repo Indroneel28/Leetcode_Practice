@@ -1,5 +1,7 @@
 class Solution {
     public List<Integer> findDuplicates(int[] nums) {
+        //METHOD 1:- USING HASH MAP DATA STRUCTURE
+        /*
         HashMap<Integer,Integer> hashMap= new HashMap<>();
         for (int num: nums){
             hashMap.put(num,hashMap.getOrDefault(num,0)+1);
@@ -11,5 +13,19 @@ class Solution {
                 arrayList.add(key);
         }
         return arrayList;
+         */
+
+        //METHOD 2:- USING BRAIN
+        ArrayList<Integer> dup= new ArrayList<>();
+        for (int i=0; i<nums.length; i++){
+            int ele= Math.abs(nums[i]);
+
+            if (nums[ele-1]<0)
+                dup.add(ele);
+            else{
+                nums[ele-1]= -nums[ele-1];
+            }
+        }
+        return dup;
     }
 }
