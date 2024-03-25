@@ -19,7 +19,8 @@ class Solution {
         ArrayList<Integer> dup= new ArrayList<>();
         for (int i=0; i<nums.length; i++){
             int ele= Math.abs(nums[i]);
-
+            //we are playing with '-'
+            //given, Each element in nums appears once or twice.
             if (nums[ele-1]<0)
                 dup.add(ele);
             else{
