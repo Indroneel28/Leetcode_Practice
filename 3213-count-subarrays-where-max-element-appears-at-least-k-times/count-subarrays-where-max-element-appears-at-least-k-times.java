@@ -2,8 +2,7 @@ class Solution {
     public long countSubarrays(int[] nums, int k) {
         int maxEle= nums[0];
         for (int num: nums){
-            if (num>maxEle)
-                maxEle= num;
+            maxEle= Math.max(num,maxEle);
         }
 
         long left= 0, right= 0, ans= 0, count =0;
