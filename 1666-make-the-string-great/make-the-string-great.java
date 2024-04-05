@@ -1,17 +1,13 @@
 class Solution {
     public String makeGood(String s) {
-        Stack<Character> stack= new Stack<>();
+        //METHOD 2:- USING STRING BUILDER
+        StringBuilder sb= new StringBuilder();
         for (int i=0; i<s.length(); i++){
-            char c= s.charAt(i);
-            if (!stack.isEmpty() && Math.abs(stack.peek()-c)==32)
-                stack.pop();
-            else
-                stack.push(c);
+            if (!sb.isEmpty() && Math.abs(sb.charAt(sb.length()-1) - s.charAt(i))==32)
+                sb.deleteCharAt(sb.length()-1);
+            else 
+                sb.append(s.charAt(i));
         }
-        s= "";
-        for (char ele: stack){
-            s+= ele;
-        }
-        return s;
+        return sb.toString();
     }
 }
