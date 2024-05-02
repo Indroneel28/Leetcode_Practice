@@ -1,14 +1,21 @@
 class Solution {
     public int findMaxK(int[] nums) {
-        //Brute Force
+        //Sorting and two pointers
+        Arrays.sort(nums);
+        int left=0, right= nums.length-1;
         int max= -1;
-        for (int i=0; i<nums.length; i++){
-            for (int j=i+1; j<nums.length; j++){
-                if (nums[i]==-nums[j]){
-                    if (Math.abs(nums[i])>max)
-                        max= Math.abs(nums[i]);
+        while (left<right){
+            if (nums[left]==-nums[right]){
+                if (Math.abs(nums[left])>max){
+                    max= Math.abs(nums[left]);
                 }
+                left++;
+                right--;
             }
+            else if (Math.abs(nums[left])<Math.abs(nums[right]))
+                right--;
+            else 
+                left++;
         }
         return max;
     }
