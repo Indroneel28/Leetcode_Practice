@@ -17,16 +17,21 @@ class Solution {
             if (x>y)
                 return 1;
         }
-        
-        for (int j=min; j<len1; j++){
-            int x= Integer.parseInt(arr1[j]);
-            if (x>0)
-                return 1;
+        if (len1==len2)
+            return 0;
+        if (len1>len2){
+            for (int j=min; j<len1; j++){
+                int x= Integer.parseInt(arr1[j]);
+                if (x>0)
+                    return 1;
+            }
         }
-        for (int j=min; j<len2; j++){
-            int y= Integer.parseInt(arr2[j]);
-            if (y>0) 
-                return -1;
+        else {
+            for (int j=min; j<len2; j++){
+                int y= Integer.parseInt(arr2[j]);
+                if (y>0)
+                    return -1;
+            }
         }
         return 0; //equal
     }
