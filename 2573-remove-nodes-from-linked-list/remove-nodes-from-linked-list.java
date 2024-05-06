@@ -34,5 +34,8 @@ class Solution {
             p= p.next;
         }
         return reverse(newHead.next);
+
+        //WE CAN ALSO SOLVE IT WITH STACK LIKE INSERTING ALL NODES IN STACK AND RETRIEVING OUT AND COMPARING WITH MAX
+        //IF > MAX THEN WE WILL ADD IN THE BEGINNING OF THE LL AND AT LAST RETURN LL WHEN STACK IS EMPTY
     }
 }
