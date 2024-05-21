@@ -1,6 +1,5 @@
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
-        Arrays.sort(nums);
         HashSet<List<Integer>> answer= new HashSet<>();
         traverse(answer,new ArrayList<>(),nums,0);
         return new ArrayList<>(answer);
