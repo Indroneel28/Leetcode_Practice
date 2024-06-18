@@ -1,27 +1,28 @@
 class Solution {
     public int maxProfitAssignment(int[] difficulty, int[] profit, int[] worker) {
-         // Sort workers based on their ability
+        //Our main goal is to achieve profit
+        //Sorting on the basisi of increasing work difficulty
         Arrays.sort(worker);
 
-        int n = difficulty.length;
-        Job[] store = new Job[n];
-        for (int i = 0; i < n; i++) {
-            store[i] = new Job(difficulty[i], profit[i]);
+        int n= difficulty.length;
+        Job[] store= new Job[n];
+        for (int i=0; i<n; i++){
+            store[i]= new Job(difficulty[i],profit[i]);
         }
 
-        // Sort jobs based on difficulty
-        Arrays.sort(store, (a, b) -> a.difficulty - b.difficulty);
+        //Sorting on the basis of increasing difficulty
+        Arrays.sort(store, (a,b)-> a.difficulty-b.difficulty);
 
-        int totalProfit = 0;
-        int jobIndex = 0;
-        int maxProfit = 0;
+        int totalProfit= 0;
+        int jobIndex= 0;
+        int maxProfit= 0;
 
-        for (int ability : worker) {
-            while (jobIndex < n && store[jobIndex].difficulty <= ability) {
-                maxProfit = Math.max(maxProfit, store[jobIndex].profit);
+        for (int ability: worker){
+            while (jobIndex<n && store[jobIndex].difficulty<=ability){
+                maxProfit= Math.max(maxProfit,store[jobIndex].profit);
                 jobIndex++;
             }
-            totalProfit += maxProfit;
+            totalProfit+=maxProfit;
         }
         return totalProfit;
     }
