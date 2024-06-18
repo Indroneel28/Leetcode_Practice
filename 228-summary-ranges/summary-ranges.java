@@ -7,9 +7,9 @@ class Solution {
         for (int i=0; i<nums.length; i++){
             if (i+1==nums.length || nums[i]!=nums[i+1]-1 ){
                 if (i==j)
-                    list.add(nums[i]+"");
+                    list.add(String.valueOf(nums[i]));
                 else
-                    list.add(nums[j]+"->"+nums[i]);
+                    list.add(String.valueOf(nums[j]+"->"+nums[i]));
                 j= i+1;
             }
         }
