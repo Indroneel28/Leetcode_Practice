@@ -39,3 +39,5 @@ class Solution {
         return numOfBouqets;
     }
 }
+
+//O(N∗Log(Max(Bloomday))
