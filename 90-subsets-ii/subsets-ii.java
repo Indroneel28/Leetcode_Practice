@@ -9,7 +9,7 @@ class Solution {
 
     private void recursion(List<List<Integer>> answer, List<Integer> list, int[] nums, int index, int len){
         if (index>=len){
-            Collections.sort(list);
+            // Collections.sort(list);
             
             //If list is not there inside answer then we have to add it
             if (!checkIfContains(answer, list)) {
