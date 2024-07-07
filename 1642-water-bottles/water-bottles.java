@@ -6,7 +6,6 @@ class Solution {
             int newFullBottles= (numBottles+remainingEmptyBottles)/ numExchange;
             remainingEmptyBottles= (numBottles+remainingEmptyBottles)%numExchange;
             numBottles= newFullBottles;
-            System.out.println(numBottles+" "+countBottlesDrank);
         }
         return countBottlesDrank;
     }
