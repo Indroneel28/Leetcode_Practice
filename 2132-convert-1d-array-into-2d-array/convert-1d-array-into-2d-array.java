@@ -5,6 +5,8 @@ class Solution {
 
         int[][] matrix= new int[m][n]; // m is no. of rows and n is no. of columns
         int x= 0, y= 0;
+        
+        //Using only one loop not 2 loops
         for (int i=0; i<original.length; i++){
             matrix[x][y]= original[i];
             y++;
