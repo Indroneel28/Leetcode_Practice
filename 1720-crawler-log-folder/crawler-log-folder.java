@@ -8,7 +8,6 @@ class Solution {
             }
             else if (!file.startsWith("./")) //does not start with ./ means it ends like x/
                 count++;
-            System.out.println(count);
         }
         return count;
     }
