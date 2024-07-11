@@ -23,10 +23,10 @@ class Solution {
                 }
             }
         }
-        String answer="";
+        StringBuilder answer= new StringBuilder();
         while (!stack.isEmpty()){
-            answer=  stack.pop()+ answer;
+            answer.insert(0,stack.pop()); //Reversed
         }
-        return answer;
+        return answer.toString();
     }
 }
