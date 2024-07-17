@@ -45,8 +45,7 @@ class Solution {
             nodesToBeDeleted.add(ele);
 
         List<TreeNode> roots= new ArrayList<>();
-        if (root==null || (nodesToBeDeleted.contains(root.val) && root.left==null && root.right==null))
-            return roots; //Empty list is the naswer
+
 
         postOrderTraversal(root,nodesToBeDeleted,roots);
         if (!nodesToBeDeleted.contains(root.val))
