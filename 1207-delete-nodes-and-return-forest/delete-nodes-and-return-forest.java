@@ -14,7 +14,7 @@
  * }
  */
 class Solution {
-    private void postOrderTraversal(TreeNode node, ArrayList<Integer> nodesToBeDeleted, List<TreeNode> newRoots){
+    private void postOrderTraversal(TreeNode node, HashSet<Integer> nodesToBeDeleted, List<TreeNode> newRoots){
         if (node==null)
             return;
         postOrderTraversal(node.left,nodesToBeDeleted,newRoots);
@@ -38,14 +38,16 @@ class Solution {
             node.right= null;
         }
     }
+
     public List<TreeNode> delNodes(TreeNode root, int[] to_delete) {
         //METHOD:- DFS TRAVERSAL
-        ArrayList<Integer> nodesToBeDeleted= new ArrayList<>();
+        HashSet<Integer> nodesToBeDeleted= new HashSet<>();
         for (int ele: to_delete)
             nodesToBeDeleted.add(ele);
 
         List<TreeNode> roots= new ArrayList<>();
-
+        if (root==null || (nodesToBeDeleted.contains(root.val) && root.left==null && root.right==null))
+            return roots; //Empty list is the naswer
 
         postOrderTraversal(root,nodesToBeDeleted,roots);
         if (!nodesToBeDeleted.contains(root.val))
@@ -56,7 +58,6 @@ class Solution {
             if (root.right!=null)
                 roots.add(root.right);
         }
-
         return roots;
     }
 }
