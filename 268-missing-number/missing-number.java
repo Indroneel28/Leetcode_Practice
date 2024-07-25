@@ -1,25 +1,64 @@
 class Solution {
     public int missingNumber(int[] nums) {
-        // Arrays.sort(nums);
-        // if(nums.length==1 && nums[0]==0)
-        //     return 1;
-        // boolean val= false;
-        // for (int i=0; i<nums.length-1; i++){
-        //     if (nums[i]+1 != nums[i+1])
-        //         return nums[i]+1;
-        //         if(nums[i]==0)
-        //         val=true;
-        // }
-        // return val==true ? nums.length : 0;
+        //STRIVER'S A TO Z COURSE
+        //NOTE:- There is only one missing number in the array from range (0,n)
 
-        //Follow-up
-        //By using Gauss Law
-        int sum= (nums.length)*(nums.length+1)/2;
-        int total=0;
-        for (int i=0; i< nums.length; i++){
-            total+=nums[i];
+
+        //METHOD 1:- BRUTE FORCE APPROACH
+        /*
+        int n= nums.length;
+        for (int i=0; i<=n; i++){
+            boolean exists= false;
+            for (int j=0; j<n; j++){
+                if (i==nums[j]){
+                    exists= true; //i exists is nums
+                    break;
+                }
+            }
+            if (!exists) //If i does not exist in nums
+                return i;
         }
+        return -1;//This line will never execute according to constraints
+         */
+        //TC is O(n^2) and SC is O(1)
+
+
+        //METHOD 2:- BETTER APPROACH (USING ARRAY)
+        /*
+        int[] arr= new int[nums.length+1];
+        for (int ele: nums){
+            arr[ele]= 1;
+        }
+        for (int i=0; i<arr.length; i++){
+            if (arr[i]==0)
+                return i;
+        }
+        return -1;//This line will never execute according to constraints
+         */
+        //TC is O(2n) and SC is O(n)
+
+        //NOTE:- THERE ARE TWO OPTIMAL SOLUTIONS
+
+        //METHOD 3:- OPTIMAL SOLUTION (USING GAUSS LAW)
+        //Sum of n numbers= (n)*(n+1)/2
+        /*
+        int n= nums.length;
+        int sum= (n*(n+1))/2;
+
+        int total=0;
+        for (int ele: nums)
+            total+= ele;
+
         return sum-total;
-        //Here, TC is O(N)
+         */
+        //TC is O(n) and SC is O(1)
+
+        //METHOD 4:- OPTIMAL SOLUTION (USING XOR OPERATORS)
+        int xor1= 0, xor2= 0, n= nums.length;
+        for (int i=1; i<=n; i++)
+            xor1^=i;
+        for (int ele: nums)
+            xor2^=ele;
+        return xor1^xor2;
     }
 }
