@@ -1,8 +1,6 @@
 class Solution {
     public int missingNumber(int[] nums) {
-        //STRIVER'S A TO Z COURSE
-        //NOTE:- There is only one missing number in the array from range (0,n)
-
+        //NOTE:- There is only one missing number in the array from range (0 to n)
 
         //METHOD 1:- BRUTE FORCE APPROACH
         /*
@@ -54,11 +52,16 @@ class Solution {
         //TC is O(n) and SC is O(1)
 
         //METHOD 4:- OPTIMAL SOLUTION (USING XOR OPERATORS)
+        //RULES:------- Xx can be any integer
+        // x ^ x = 0
+        // x ^ 0 = x
         int xor1= 0, xor2= 0, n= nums.length;
-        for (int i=1; i<=n; i++)
-            xor1^=i;
-        for (int ele: nums)
-            xor2^=ele;
+        for (int i=0; i<n; i++) {
+            xor1 ^= (i+1); 
+            xor2 ^= nums[i];
+        }
         return xor1^xor2;
+        //TC is O(n) and Sc is O(1)
+        //This is better optimal solution than Method 3
     }
 }
