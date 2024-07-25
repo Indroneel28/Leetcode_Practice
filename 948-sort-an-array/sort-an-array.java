@@ -52,9 +52,8 @@ class Solution {
         }
 
         //Storing in arr from temp
-        int n=0;
         for (int m=low; m<=high; m++){
-            arr[m]= temp[n++];
+            arr[m]= temp[m-low];
         }
     }
 }
