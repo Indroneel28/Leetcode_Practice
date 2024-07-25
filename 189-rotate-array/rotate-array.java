@@ -1,6 +1,8 @@
 class Solution {
     public void rotate(int[] nums, int k) {
-        //METHOD 1
+        //IN INTERVIEWS, START FROM NAIVE TO OPTIMAL APPROACH
+
+        //METHOD 1:- Brute Force Approach (First Method)
         /*
         for (int i=0; i<k; i++){
             int x= nums[nums.length-1];
@@ -9,37 +11,33 @@ class Solution {
             }
             nums[0]= x;
         }
-        //TLE
-        */
+
+         */
         //Time Complexity is O(n^2) and space complexity is O(1)
 
-
-        //METHOD 2
-        
+        //METHOD 2:- Using Extra data structure (Don't use this method)
+        /*
         int len= nums.length;
         int arr[] = new int[len];
-        k= k%len;
         for (int i=len-1; i>=0; i--)
             arr[i]= nums[i-k<0 ? Math.abs(len+i-k)%len : i-k];
         for (int i=0; i<nums.length; i++)
             nums[i]= arr[i];
-            
-        //TC is O(n^2) and SC is O(n^2)
+        //TC is O(n) and SC is O(n)
+         */
 
-        //METHOD 3
-    //     k %= nums.length;
-    // reverse(nums, 0, nums.length - 1);
-    // reverse(nums, 0, k - 1);
-    // reverse(nums, k, nums.length - 1);
-    // }
-
-    // public void reverse(int[] nums, int start, int end) {
-    // while (start < end) {
-    //     int temp = nums[start];
-    //     nums[start] = nums[end];
-    //     nums[end] = temp;
-    //     start++;
-    //     end--;
-    // }
+        //METHOD 3:- Using extra data structure of size k
+        int n= nums.length;
+        k= k%n;
+        int[] temp= new int[k];
+        for (int i=n-k; i<n; i++){
+            temp[i-(n-k)]= nums[i];
+        }
+        for (int i=n-1; i>=k; i--){
+            nums[i]= nums[i-k];
+        }
+        for (int i=0; i<k; i++){
+            nums[i]= temp[i];
+        }
     }
 }
