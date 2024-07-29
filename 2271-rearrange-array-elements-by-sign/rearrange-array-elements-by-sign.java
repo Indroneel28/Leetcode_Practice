@@ -1,18 +1,21 @@
 class Solution {
     public int[] rearrangeArray(int[] nums) {
-        //USING 3-POINTERS METHOD
-        int[] newArray= new int[nums.length];
-        int m= 0, n=1; //m is pointing +ve number and n is pointing -ve number
-        for (int i=0; i<newArray.length; i++){
-            if (nums[i]>=0){
-                newArray[m]= nums[i];
-                m+=2;
-            }
-            else {
-                newArray[n]= nums[i];
-                n+=2;
-            }
+        //METHOD 1:- USING BRUTE FORCE
+        //Storing postives and negatives in separated lists
+        ArrayList<Integer> positives= new ArrayList<>();
+        ArrayList<Integer> negatives= new ArrayList<>();
+        for (int num: nums){
+            if (num>0)
+                positives.add(num);
+            else 
+                negatives.add(num);
         }
-        return newArray;
+        
+        //Storing in the array
+        for (int i=0; i< nums.length/2; i++){
+            nums[i*2]= positives.get(i);
+            nums[(i*2)+1]= negatives.get(i);
+        }
+        return nums;
     }
 }
