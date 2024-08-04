@@ -19,7 +19,7 @@ class Solution {
         int answer= 0;
         long modulo= 1000000000+7;
         for (int i=left-1; i<right; i++)
-            answer= (int) ((answer+= store[i])%modulo);
+            answer= (int) ((answer+store[i])%modulo);
         
         return answer;
         //TC is O(N^2) AND SC is O(N)
