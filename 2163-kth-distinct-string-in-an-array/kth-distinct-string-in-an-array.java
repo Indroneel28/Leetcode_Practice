@@ -21,13 +21,12 @@ class Solution {
         //TC is O(n^2) and SC is O(1)
 
         //METHOD 2:-BY USING HASHMAP
-        LinkedHashMap<String, Integer> map= new LinkedHashMap<>();
-        //NOTE:- LinkedHashMap maintains the order of elements inserted into it while HashMap is unordered.
+        HashMap<String, Integer> map= new HashMap<>();
         for (String str: arr){
             map.put(str, map.getOrDefault(str,0)+1);
         }
         int count= 0;
-        for (String str: map.keySet()){
+        for (String str: arr){
             if (map.get(str)==1){
                 count++;
                 if (count==k)
