@@ -29,7 +29,7 @@ class Solution {
         //TC is O(n^3 * nlogn) and SC is O(2 * no. of the unique triplets)
 
         //METHOD 2:- BETTER SOLUTION USING HASHING
-
+        /*
         HashSet<List<Integer>> answer= new HashSet<>();
         for (int i=0; i<nums.length; i++) {
             HashSet<Integer> set = new HashSet<>();
@@ -47,6 +47,39 @@ class Solution {
             }
         }
         return new ArrayList<>(answer);
+         */
         //TC is O(n^2 * nlogn) and SC is O(n)
+
+        //METHOD 3:- OPTIMAL SOLUTION
+
+        List<List<Integer>> answer= new ArrayList<>();
+        Arrays.sort(nums);
+
+        for (int i=0; i<nums.length; i++){
+            //Remove duplicates
+            if (i!=0 && nums[i]==nums[i-1])
+                continue;
+
+            //Moving 2 pointers
+            int j= i+1, k= nums.length-1;
+            while (j<k){
+                int sum= nums[i]+nums[j]+nums[k];
+                if (sum<0)
+                    j++;
+                else if (sum>0)
+                    k--;
+                else{
+                    List<Integer> temp= Arrays.asList(nums[i],nums[j],nums[k]);
+                    answer.add(temp);
+                    j++; k--;
+                    while (j<k && nums[j]==nums[j-1])
+                        j++;
+                    while (j<k && nums[k]==nums[k+1])
+                        k--;
+                }
+            }
+        }
+        return answer;
+        //TC is O(nlogn + n^2) and SC is O(no. of quadruplets)
     }
 }
