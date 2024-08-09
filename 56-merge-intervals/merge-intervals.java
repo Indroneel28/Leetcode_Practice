@@ -13,17 +13,11 @@ class Solution {
         for (int i=0; i<intervals.length; i++){
             if (!list.isEmpty() && intervals[i][0] <= list.get(list.size()-1).get(1)){
                 if (intervals[i][1]>list.get(list.size()-1).get(1)){
-                    List<Integer> l= new ArrayList<>();
-                    l.add(list.get(list.size()-1).get(0));
-                    l.add(intervals[i][1]);
-                    list.set(list.size()-1,l);
+                    list.set(list.size()-1,Arrays.asList(list.get(list.size()-1).get(0), intervals[i][1]));
                 }
             }
             else {
-                List<Integer> l= new ArrayList<>();
-                l.add(intervals[i][0]);
-                l.add(intervals[i][1]);
-                list.add(l);
+                list.add(Arrays.asList(intervals[i][0], intervals[i][1]));
             }
         }
 
