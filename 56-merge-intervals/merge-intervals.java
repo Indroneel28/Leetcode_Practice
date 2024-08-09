@@ -1,5 +1,6 @@
 class Solution {
     public int[][] merge(int[][] intervals) {
+        //OPTIMAL SOLUTION
         //Sorting on the basis of Earliest starting time
         Arrays.sort(intervals, new Comparator<int[]>() {
             @Override
