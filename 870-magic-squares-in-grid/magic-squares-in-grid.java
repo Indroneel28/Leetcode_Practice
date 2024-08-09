@@ -13,12 +13,13 @@ class Solution {
         HashSet<Integer> set= new HashSet<>();
         for (int k= i-1; k<=i+1; k++){
             for (int l=j-1; l<=j+1; l++){
-                set.add(grid[k][l]);
+                if (grid[k][l]>9 || grid[k][l]<1)
+                    return false;
+                else if (set.contains(grid[k][l]))
+                    return false;
+                else 
+                    set.add(grid[k][l]);
             }
-        }
-        for (int num=1 ;num<=9; num++){
-            if (!set.contains(num))
-                return false;
         }
         int row1= grid[i-1][j-1]+grid[i-1][j]+grid[i-1][j+1];
         int row2= grid[i][j-1]+grid[i][j]+grid[i][j+1];
