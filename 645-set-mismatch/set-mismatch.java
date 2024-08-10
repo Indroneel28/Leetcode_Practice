@@ -22,10 +22,11 @@ class Solution {
         //TC is O(n^2) and SC is O(2)
 
         //METHOD 2:- BETTER SOLUTION
+        /*
         int n= nums.length;
         int[] store= new int[n];
         for (int num: nums){
-            store[num-1]++;
+            store[num--]++;
         }
 
         int missing= -1, repeating= -1;
@@ -38,6 +39,25 @@ class Solution {
                 break;
         }
         return new int[]{repeating,missing};
-        //TC is O(2n) and SC is O(1)
+        //TC is O(2n) and SC is O(n)
+         */
+
+        //METHOD 3:- OPTIMAL SOLUTION (USING MATHS)
+        long n= nums.length;
+        long sumN= (n *(n +1))/2;
+        long sumN2= (n*(n+1)*(2*n+1))/6;
+        long total=0, total2= 0;
+        for (int num: nums){
+            total+= num;
+            total2+= (long)num*(long)num;
+        }
+        long val1= total-sumN, val2= total2-sumN2;
+        val2= val2/val1;
+
+        int x= (int)(val1+val2)/2;
+        int y= (int)(x-val1);
+
+        return new int[]{x,y};
+        //TC is O(n) and SC is O(1)
     }
 }
