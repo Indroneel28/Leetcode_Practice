@@ -1,6 +1,8 @@
 class Solution {
     public boolean lemonadeChange(int[] bills) {
+        //METHOD -1
         //USING HASHMAP TO COUNT THE FREQUENCY OF EACH NOTE
+        /*
         HashMap<Integer,Integer> map= new HashMap<>();
         //Initially all notes are 0
         map.put(5,0);
@@ -37,5 +39,33 @@ class Solution {
         }
         return true;
         //The Queue is empty now and all transactions are successful.
+         */
+
+        //METHOD 2:- USING COUNTING
+        int count5= 0, count10= 0;
+        for (int num: bills){
+            if (num==5)
+                count5++;
+            else if (num==10){
+                if (count5>=1){
+                    count5--;
+                    count10++;
+                }
+                else
+                    return false;
+            }
+            else{ //num==20
+                if (count5>=1 && count10>=1){
+                    count5--;
+                    count10--;
+                }
+                else if (count5>=3){
+                    count5-=3;
+                }
+                else 
+                    return false;
+            }
+        }
+        return true;
     }
 }
