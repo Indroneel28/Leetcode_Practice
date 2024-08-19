@@ -1,43 +1,46 @@
 class Solution {
     public int minDays(int[] bloomDay, int m, int k) {
-        if (m*k>bloomDay.length)
+        //OPTIMAL METHOD:- USING BINARY SEARCH
+        if (bloomDay.length<m*k)
             return -1;
-        int start= 0, end= 0;
-        for (int day: bloomDay){
-            end= Math.max(end,day);
-        }
-
-        int minDays= -1;
-        while (start<=end){
-            int mid= (start+end)/2;
-
-            if(getNumOfBouquets(bloomDay,mid,k)>=m){
-                minDays= mid;
-                end= mid-1;
+        int left= 1, right= max(bloomDay);
+        int ans= -1;
+        while(left<=right){
+            int mid= (left+right)/2;
+            System.out.println(mid);
+            if (check(bloomDay,m,k,mid)){
+                ans= mid;
+                right= mid-1;
             }
-            else
-                start= mid+1;
+            else{
+                left= mid+1;
+            }
         }
-        return minDays;
+        return ans;
+        //TC is O(nlogn) and SC is O(1)
     }
 
-    //Helper Method
-    private int getNumOfBouquets(int[] bloomDay, int mid, int k){
-        int numOfBouqets= 0, count= 0;
-        for (int i=0; i<bloomDay.length; i++){
-            if (bloomDay[i]<=mid)
-                count++;
-            else
-                count= 0;
-
-            if (count==k){
-                numOfBouqets++;
-                count= 0;
+    private boolean check(int[] arr, int m, int k, int mid){
+        int count= 0, c= 0;
+        for (int ele: arr){
+            int x= ele-mid;
+            if (x<=0){
+                c++;
+            }
+            else{
+                count += (c/k);
+                c= 0;
             }
         }
+        count += (c/k); //For last iteration
+        return count>=m;
+    }
 
-        return numOfBouqets;
+    private int max(int[] arr){
+        int maximum= 0;
+        for (int ele: arr){
+            maximum= Math.max(maximum,ele);
+        }
+        return maximum;
     }
 }
-
-//O(N∗Log(Max(Bloomday))
