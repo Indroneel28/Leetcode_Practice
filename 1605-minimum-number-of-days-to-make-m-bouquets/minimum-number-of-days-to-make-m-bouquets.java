@@ -1,22 +1,22 @@
 class Solution {
     public int minDays(int[] bloomDay, int m, int k) {
         //OPTIMAL METHOD:- USING BINARY SEARCH
-        if (bloomDay.length<m*k)
+        if (bloomDay.length<(long)m*(long)k)
             return -1;
-        int left= 1, right= max(bloomDay);
-        int ans= -1;
+        int left= min(bloomDay), right= max(bloomDay);
+        //int ans= -1;
         while(left<=right){
             int mid= (left+right)/2;
-            System.out.println(mid);
             if (check(bloomDay,m,k,mid)){
-                ans= mid;
+                //ans= mid;
                 right= mid-1;
             }
             else{
                 left= mid+1;
             }
         }
-        return ans;
+        //return ans;
+        return left;
         //TC is O(nlogn) and SC is O(1)
     }
 
@@ -40,6 +40,13 @@ class Solution {
         int maximum= 0;
         for (int ele: arr){
             maximum= Math.max(maximum,ele);
+        }
+        return maximum;
+    }
+    private int min(int[] arr){
+        int maximum= 0;
+        for (int ele: arr){
+            maximum= Math.min(maximum,ele);
         }
         return maximum;
     }
