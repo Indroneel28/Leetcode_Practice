@@ -1,7 +1,19 @@
 class Solution {
     public int shipWithinDays(int[] weights, int days) {
-        int left= 1, right= sum(weights);
 
+        //int left= 1, right= sum(weights);
+
+        //OR
+
+        //left will be the maximum and right will be the sum
+        int left= 0, right= 0;
+        for (int ele: weights){
+            if (ele>left)
+                left= ele; //max
+            right+= ele; //sum
+        }
+
+        //BINARY SEARCH
         while (left<=right){
             int mid= (left+right)/2;
             if (check(weights,mid,days)){
@@ -18,8 +30,6 @@ class Solution {
     private boolean check(int[] weights, int mid, int days){
         int c= 0, m=mid;
         for (int weight: weights){
-            if(weight>mid)
-                return false;
             if (m>=weight){
                 m-=weight;
             }
@@ -31,13 +41,5 @@ class Solution {
         if (m!=mid) //For last iteration
             c++;
         return c<=days;
-    }
-
-    private int sum(int[] weights){
-        int s= 0;
-        for(int weight: weights){
-            s+= weight;
-        }
-        return s;
     }
 }
