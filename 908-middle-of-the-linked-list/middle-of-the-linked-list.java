@@ -10,35 +10,34 @@
  */
 class Solution {
     public ListNode middleNode(ListNode head) {
-        //USING TWO LOOOPS
+        //METHOD 1:- BRUTE FORCE APPROACH
         /*
         //First we will find the total number of nodes in LL
-        ListNode p= head;
-        int c=0;
-        while (p != null){
+        ListNode p = head;
+        int c = 0;
+        while (p != null) {
             c++;
-            p= p.next;
+            p = p.next;
         }
 
         //Then we will run node till n/2
-        int check=0;
-        ListNode q= head;
-        while (check<c/2){
-            q= q.next;
+        int check = 0;
+        ListNode q = head;
+        while (check < c / 2) {
+            q = q.next;
             check++;
         }
         return q;
         */
-
-        //TORTOISE AND HARE ALGORITHM
-        //Using tortoise and hare algorithm
-        //When fast willreach the end of LL then slow will be at middle
-        //because slow is incremented by 1 and fast is incremented by 2
-        ListNode slow= head, fast= head;
+        //TC IS O(N/2 + N) AND SC IS O(1)
+        
+        //METHOD 2:- OPTIMAL METHOD USING TORTOISE HOARE ALGORITHM
+        ListNode fast= head, slow= head;
         while (fast!=null && fast.next!=null){
             slow= slow.next;
             fast= fast.next.next;
         }
         return slow;
+        //TC is O(N/2) and SC is O(1)
     }
 }
