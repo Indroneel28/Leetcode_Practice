@@ -16,5 +16,7 @@ class Solution {
             }
         }
         return matrix;
+        //TC is O(n*m) and SC is O(1)
+        //n*m is the length of the array "original"
     }
 }
