@@ -12,18 +12,16 @@ class Solution {
         //Not possible case
         if (n > sumOfN || (float)sumOfN/n > 6) //Not fitting in 1 to 6
             return new int[]{};
-        
+
         //Possible case
         int[] answer= new int[n];
         int avg= sumOfN/n;
-        for (int i=0; i<n; i++)
-            answer[i]= avg;
         
-        int leftOver= sumOfN-(avg*n);
-        int i= 0;
+        Arrays.fill(answer, avg);
+
+        int leftOver= sumOfN % n, i= 0;
         while (leftOver>0){ //will execute less than 6 times
-            answer[i]++;
-            i++;
+            answer[i]++; i++;
             leftOver--;
         }
         return answer;
