@@ -10,14 +10,14 @@ class Solution {
         int sumOfN= mean * (m+n) - sum;
 
         //Not possible case
-        if (n > sumOfN || (float)sumOfN/n > 6) //Not fitting in 1 to 6
+        if (n > sumOfN || sumOfN > 6*n) //Not fitting in 1 to 6
             return new int[]{};
 
         //Possible case
         int[] answer= new int[n];
         int avg= sumOfN/n;
-        
-        Arrays.fill(answer, avg);
+        for (int i=0; i<n; i++)
+            answer[i]= avg;
 
         int leftOver= sumOfN % n, i= 0;
         while (leftOver>0){ //will execute less than 6 times
