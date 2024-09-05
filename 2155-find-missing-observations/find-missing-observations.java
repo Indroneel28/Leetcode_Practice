@@ -15,16 +15,16 @@ class Solution {
 
         //Possible case
         int[] answer= new int[n];
-        int avg= sumOfN/n;
-        for (int i=0; i<n; i++)
-            answer[i]= avg;
-
-        int leftOver= sumOfN % n, i= 0;
-        while (leftOver>0){ //will execute less than 6 times
-            answer[i]++; i++;
-            leftOver--;
+        int avg= sumOfN/n, leftOver= sumOfN % n;
+        
+        for (int i=0; i<n; i++) {
+            answer[i] = avg;
+            if (i<leftOver) //will execute less than 6 times
+                answer[i]+=1;
         }
+
         return answer;
         //TC is O(m + n) and Sc is O(n)
+        //3 ms
     }
 }
