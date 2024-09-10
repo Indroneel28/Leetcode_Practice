@@ -9,44 +9,50 @@
  * }
  */
 class Solution {
-    public int[][] spiralMatrix(int rows, int columns, ListNode head) {
-        int[][] matrix = new int[rows][];
-        for (int i = 0; i < rows; i++) {
-            matrix[i] = new int [columns];
-            Arrays.fill(matrix[i], -1);
+    public int[][] spiralMatrix(int m, int n, ListNode head) {
+        //Declaring Matrix
+        int[][] matrix= new int[m][n];
+
+        //Filling all element with -1
+        for (int[] rows: matrix){
+            Arrays.fill(rows,-1);
         }
 
-        int topRow = 0, bottomRow = rows - 1, leftColumn = 0, rightColumn = columns - 1;
-        while (head != null) {
-        
-            for (int col = leftColumn; col <= rightColumn && head != null; col++) {
-                matrix[topRow][col] = head.val;
-                head = head.next;
-            }
-            topRow++;
+        //Note:- The number of nodes in the list is in the range [1, m * n]
+        ListNode p= head;
+        int left= 0, right= n-1, top= 0, bottom= m-1;
 
-        
-            for (int row = topRow; row <= bottomRow && head != null; row++) {
-                matrix[row][rightColumn] = head.val;
-                head = head.next;
+        while (p!=null){
+            //Move Rightwards
+            for (int i=left; i<=right && p!=null; i++){
+                matrix[top][i]= p.val;
+                p= p.next;
             }
-            rightColumn--;
+            top++;
 
- 
-            for (int col = rightColumn; col >= leftColumn && head != null; col--) {
-                matrix[bottomRow][col] = head.val;
-                head = head.next;
+            //Move Downwards
+            for (int i=top; i<=bottom && p!=null; i++){
+                matrix[i][right]= p.val;
+                p= p.next;
             }
-            bottomRow--;
+            right--;
 
-       
-            for (int row = bottomRow; row >= topRow && head != null; row--) {
-                matrix[row][leftColumn] = head.val;
-                head = head.next;
+            //Move leftwards
+            for (int i=right; i>=left && p!=null; i--){
+                matrix[bottom][i]= p.val;
+                p= p.next;
             }
-            leftColumn++;
+            bottom--;
+
+            //Move upwards
+            for (int i=bottom; i>=top && p!=null; i--){
+                matrix[i][left]= p.val;
+                p= p.next;
+            }
+            left++;
         }
-
+        
         return matrix;
+        //TC is O(m*n) and SC is O(m*n)
     }
 }
