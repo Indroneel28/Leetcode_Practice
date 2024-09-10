@@ -22,12 +22,15 @@ class Solution {
         //TC is O(n) and SC is O(n-1)
     }
 
+    //Finding GCD using Euclidean method
     private int findGCD(int a, int b){
-        int gcd= 1;
-        for (int i=1; i<=a; i++){
-            if (a%i==0 && b%i==0)
-                gcd= i;
+        if (a==1 || b==1)
+            return 1;
+        while (b!=0){
+            int rem= a%b;
+            a= b;
+            b= rem;
         }
-        return gcd;
+        return a;
     }
 }
