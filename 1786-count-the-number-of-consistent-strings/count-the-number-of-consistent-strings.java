@@ -1,12 +1,19 @@
 class Solution {
     public int countConsistentStrings(String allowed, String[] words) {
-        //BRUTE FORCE APPROACH
+        //OPTIMAL APPROACH:- USING HASHSET
+        if (allowed.length()==26)
+            return words.length; //All words will be consistent
+
         int count= 0;
+        HashSet<Character> set= new HashSet<>();
+        for (int i=0; i<allowed.length(); i++)
+            set.add(allowed.charAt(i));
+
         for (String word: words){
             boolean contain= true;
             for (int i=0; i<word.length(); i++){
-                if (!allowed.contains(word.charAt(i)+"")){
-                    contain= false;
+                if (!set.contains(word.charAt(i))) { //O(1)
+                    contain = false;
                     break;
                 }
             }
