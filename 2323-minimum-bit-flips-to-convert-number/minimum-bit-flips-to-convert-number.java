@@ -1,14 +1,12 @@
 class Solution {
     public int minBitFlips(int start, int goal) {
-        //BY COUNTING THE UNMATCHED BITS
-        int countFlipBits= 0;
-        while (start!=0 || goal!=0) {
-            int rem1 = start % 2, rem2 = goal % 2;
-            if (rem1 != rem2)
-                countFlipBits++;
-            start/=2; goal/=2;
+        //BETTER APPROACH:- BY USING XOR RULES
+        int countFlipBits= 0, xor= start^goal;
+        while (xor!=0){
+            countFlipBits += xor&1;
+            xor>>>=1;
         }
         return countFlipBits;
-        //TC is O(logn) and SC is O(1)
+        //TC is O(number of bits) and SC is O(1)
     }
 }
