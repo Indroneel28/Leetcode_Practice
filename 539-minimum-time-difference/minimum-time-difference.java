@@ -6,10 +6,10 @@ class Solution {
             @Override
             public int compare(String a, String b) {
                 //Store the minutes and hours in variables for convenience
-                int minA = Integer.parseInt(a.substring(a.indexOf(':') + 1));
-                int hourA = Integer.parseInt(a.substring(0, a.indexOf(':')));
-                int minB = Integer.parseInt(b.substring(b.indexOf(':') + 1));
-                int hourB = Integer.parseInt(b.substring(0, b.indexOf(':')));
+                int minA = (a.charAt(3)-'0')*10 + (a.charAt(4)-'0');
+                int hourA = (a.charAt(0)-'0')*10 + (a.charAt(1)-'0');
+                int minB = (b.charAt(3)-'0')*10 + (b.charAt(4)-'0');
+                int hourB = (b.charAt(0)-'0')*10 + (b.charAt(1)-'0');
 
                 if (hourA > hourB)
                     return 1;
@@ -34,10 +34,10 @@ class Solution {
     //Method to find the difference
     private int findMinutesDifference(String a, String b){
         //Store the minutes and hours in variables for convenience
-        int minA= Integer.parseInt(a.substring(a.indexOf(':')+1));
-        int hourA= Integer.parseInt(a.substring(0,a.indexOf(':')));
-        int minB= Integer.parseInt(b.substring(b.indexOf(':')+1));
-        int hourB= Integer.parseInt(b.substring(0,b.indexOf(':')));
+        int minA = (a.charAt(3)-'0')*10 + (a.charAt(4)-'0');
+        int hourA = (a.charAt(0)-'0')*10 + (a.charAt(1)-'0');
+        int minB = (b.charAt(3)-'0')*10 + (b.charAt(4)-'0');
+        int hourB = (b.charAt(0)-'0')*10 + (b.charAt(1)-'0');
 
         //AntiClockwise from A to B
         int nHourDiffAToB= hourB-hourA;
