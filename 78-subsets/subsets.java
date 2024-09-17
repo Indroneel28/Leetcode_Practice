@@ -1,21 +1,23 @@
 class Solution {
-    //METHOD 1:- USING RECURSION AND BACKTRACKING
+    //METHOD 2:- USING BIT MANIPULATION
     public List<List<Integer>> subsets(int[] nums) {
+        //To store the subsets
         List<List<Integer>> answer= new ArrayList<>();
-        traverse(answer,nums,new ArrayList<>(),0);
-        return answer;
-    }
-    //TC is O(2^n) and SC is O(n)
-
-    //Recursion and Backtracking
-    private void traverse(List<List<Integer>> answer, int[] nums, List<Integer> list, int index){
-        if (index==nums.length) {
-            answer.add(new ArrayList<>(list));
-            return;
+        
+        int limit= (int) Math.pow(2,nums.length);
+        //If len=3 then power set will contain 2^3= 8 elements
+        
+        for (int i=0; i<limit; i++){
+            List<Integer> list= new ArrayList<>();
+            int index= i;
+            for (int j=0; j<nums.length; j++){
+                if ((index&1) == 1)
+                    list.add(nums[j]);
+                index= index>>>1;
+            }
+            answer.add(list);
         }
-        list.add(nums[index]);
-        traverse(answer,nums,list,index+1);
-        list.remove(list.size()-1); //Remove the last inserted element //BACKTRACK
-        traverse(answer,nums,list,index+1);
+        return answer;
+        //TC is O(2^n * n) and SC is O(2^n * n)
     }
 }
