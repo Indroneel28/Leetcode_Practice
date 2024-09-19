@@ -25,8 +25,8 @@ class Solution {
             }
         }
         //System.out.println(result);
-        if (result.isEmpty())
-            result.add(Integer.parseInt(expression));
+        if (result.isEmpty()) //edge case:- there is no operator in the expression
+            result.add(Integer.parseInt(expression)); //just return the value by converting expression string into int
         return result;
         //TC is O(n*(2^n)) and SC is O(n)
     }
