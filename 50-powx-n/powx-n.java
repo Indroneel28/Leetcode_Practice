@@ -1,22 +1,21 @@
 class Solution {
     public double myPow(double x, int n) {
-    //     if((n==Integer.MAX_VALUE || n== Integer.MIN_VALUE) && x<1)
-    //         return 0.00000;
-    //     if ((n==Integer.MAX_VALUE || n== Integer.MIN_VALUE) && x==1.00000)
-    //         return 1;
-        
-    //     double store= pow(x,Math.abs(n));
-    //     if (n>=0)
-    //         return store;
-    //     else 
-    //         return 1/store;
-    // }
+        //OPTIMAL METHOD:- RECURSIVE APPROACH
 
-    // public double pow(double x, int n){
-    //     if (n==0)
-    //         return 1;
-    //     return x*pow(x,n-1);
-    
-        return Math.pow(x,n);
+        //sucking edge case (just ignore it)
+        if (n == Integer.MIN_VALUE) 
+            return 1/x * myPow(x, n + 1); //ignore it
+
+        if (n<0){ //n is negative
+            n= -n; //make n positive
+            x= 1.0/x; 
+        }
+        if (n==0)
+            return 1;
+        else if (n%2==0)
+            return myPow(x*x,n/2);
+        else //n%2==1
+            return x * myPow(x*x,n/2);
+        //TC is O(logn) and SC is O(logn)
     }
 }
