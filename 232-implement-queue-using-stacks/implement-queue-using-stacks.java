@@ -1,5 +1,7 @@
 class MyQueue {
-    //Two stacks are used
+
+    //METHOD 1:- Two stacks are used
+    /*
     Stack<Integer> stack, store;
     public MyQueue() {
         this.stack= new Stack<>();
@@ -33,6 +35,53 @@ class MyQueue {
 
     public boolean empty() {
         return stack.isEmpty();
+        //TC is O(1)
+    }
+     */
+
+    //Follow-up: Can you implement the queue such that each operation is amortized O(1) time complexity?
+    //In other words, performing n operations will take overall O(n) time even if one of those operations may take longer.
+
+    Stack<Integer> stack1, stack2;
+
+    public MyQueue() {
+        this.stack1 = new Stack<>();
+        this.stack2 = new Stack<>();
+    }
+
+    public void push(int x) {
+        stack1.push(x);
+        //TC is O(1)
+    }
+
+    public int pop() {
+        if (stack1.isEmpty() && stack2.isEmpty())
+            return -1;
+        if (stack2.isEmpty()) {
+            //Move from stack 1 to stack 2
+            while (!stack1.isEmpty()) {
+                stack2.push(stack1.pop());
+            }
+        }
+        return stack2.pop();
+        //TC is O(1) actually amortized O(1)
+    }
+
+    public int peek() {
+        if (stack1.isEmpty() && stack2.isEmpty())
+            return -1;
+        if (stack2.isEmpty()) {
+            //Move from stack 1 to stack 2
+            while (!stack1.isEmpty()) {
+                stack2.push(stack1.pop());
+            }
+        }
+        return stack2.peek();
+        //TC is O(1) actually amortized O(1)
+    }
+
+    public boolean empty() {
+        return stack1.isEmpty() && stack2.isEmpty();
         //TC is O(1)
     }
 }
