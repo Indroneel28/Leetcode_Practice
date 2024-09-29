@@ -1,9 +1,11 @@
-class MinStack {
+public class MinStack {
+
     //METHOD 1:- USING ARRAY
     /*
     Methods pop, top and getMin operations will always be called on non-empty stacks. //Most IMP Line
     At most 3 * 10^4 calls will be made to push, pop, top, and getMin.
      */
+    /*
     int[] arr; int top;
     public MinStack() {
         this.arr= new int[30000];
@@ -29,6 +31,51 @@ class MinStack {
                 min= arr[i];
         }
         return min;
+        //TC is O(n)
+    }
+     */
+
+    //METHOD 2:- USING LINKEDLIST
+    
+    Node head;
+    public MinStack() {
+        this.head= null;
+    }
+
+    public void push(int val) {
+        Node node= new Node(val);
+        node.next= head;
+        head= node;
+    }
+
+    public void pop() {
+        head= head.next;
+    }
+
+    public int top() {
+        return head.data;
+    }
+
+    public int getMin() {
+        Node p= head;
+        int min= Integer.MAX_VALUE;
+        while (p!=null){
+            if (p.data<min)
+                min= p.data;
+            p= p.next;
+        }
+        return min;
+        //TC is O(n)
+    }
+}
+
+//Node Class
+class Node{
+    int data;
+    Node next;
+    public Node(int data){
+        this.data= data;
+        this.next= null;
     }
 }
 
