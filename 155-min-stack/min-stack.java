@@ -5,79 +5,51 @@ public class MinStack {
     Methods pop, top and getMin operations will always be called on non-empty stacks. //Most IMP Line
     At most 3 * 10^4 calls will be made to push, pop, top, and getMin.
      */
-    /*
-    int[] arr; int top;
-    public MinStack() {
-        this.arr= new int[30000];
-        top= -1;
-    }
-
-    public void push(int val) {
-        arr[++top]= val;
-    }
-
-    public void pop() {
-        arr[top--]= 0;
-    }
-
-    public int top() {
-        return arr[top];
-    }
-
-    public int getMin() {
-        int min= arr[0];
-        for (int i=1; i<=top; i++){
-            if (arr[i]<min)
-                min= arr[i];
-        }
-        return min;
-        //TC is O(n)
-    }
-     */
 
     //METHOD 2:- USING LINKEDLIST
-    
-    Node head;
+
+    //METHOD 3:- USING STACK AND Pair Class
+    Stack<Pair> stack;
     public MinStack() {
-        this.head= null;
+        this.stack= new Stack<>();
     }
 
     public void push(int val) {
-        Node node= new Node(val);
-        node.next= head;
-        head= node;
+        if (stack.isEmpty())
+            stack.push(new Pair(val,val));
+        else
+            stack.push(new Pair(val,Math.min(val,stack.peek().minValue)));
     }
 
     public void pop() {
-        head= head.next;
+        stack.pop();
     }
 
     public int top() {
-        return head.data;
+        return stack.peek().value;
     }
 
     public int getMin() {
-        Node p= head;
-        int min= Integer.MAX_VALUE;
-        while (p!=null){
-            if (p.data<min)
-                min= p.data;
-            p= p.next;
-        }
-        return min;
-        //TC is O(n)
+        return stack.peek().minValue;
     }
+    //TC is O(1) and SC is O(2n) coz we are storing pairs
 }
 
-//Node Class
-class Node{
-    int data;
-    Node next;
-    public Node(int data){
-        this.data= data;
+//Pair Class
+class Pair{
+    int value; //Will store the value
+    int minValue; //Will store the minimum till now
+
+    Pair next; //Point to the next Pair
+
+    //Constructor
+    public Pair(int value, int minValue){
+        this.value= value;
+        this.minValue= minValue;
         this.next= null;
     }
 }
+
 
 /**
  * Your MinStack object will be instantiated and called as such:
