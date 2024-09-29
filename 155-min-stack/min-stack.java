@@ -1,31 +1,48 @@
 class MinStack {
-    //METHOD 4:- USING TWO STACKS
-    Stack<Integer> stack, minStack;
+    //METHOD 5:- STRIVER MATHEMATICAL CALCULATION OP
+    Stack<Long> stack;
+    long min;
     public MinStack() {
         this.stack= new Stack<>();
-        this.minStack= new Stack<>();
+        this.min= Integer.MAX_VALUE;
     }
 
-    public void push(int val) {
-        stack.push(val);
-        if (minStack.isEmpty() || val<=minStack.peek())
-            minStack.push(val);
+    public void push(long val) {
+        if (stack.isEmpty()){
+            min= val;
+            stack.push(val);
+        }
+        else{
+            if (val<=min){
+                stack.push(2*val-min);
+                min= val;
+            }
+            else
+                stack.push(val);
+        }
     }
 
     public void pop() {
-        int top= stack.pop();
-        if (minStack.peek()==top)
-            minStack.pop();
+        if (stack.isEmpty())
+            return;
+        long top= stack.pop();
+        if (top<=min){
+            min= 2*min-top;
+        }
     }
 
-    public int top() {
+    public long top() {
+        if (stack.isEmpty())
+            return -1;
+        if (stack.peek()<=min)
+            return min;
         return stack.peek();
     }
 
-    public int getMin() {
-        return minStack.peek();
+    public long getMin() {
+        return min;
     }
-    //TC is O(1) and SC is O(2n)
+    //TC is O(n) and SC is O(1)
 }
 
 /**
