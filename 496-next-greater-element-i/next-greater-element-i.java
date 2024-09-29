@@ -18,7 +18,7 @@ class Solution {
         }
         return arr;
          */
-        //TC is O(n^2) and SC is O(1)
+        //TC is O(m*n) and SC is O(n)
 
         //OPTIMAL METHOD
         HashMap<Integer,Integer> map= new HashMap<>();
@@ -41,6 +41,6 @@ class Solution {
             ans[i]= map.get(nums1[i]);
         }
         return ans;
-        //TC is O(n+n+n) and SC is O(2n+n+n)
+        //TC is O(m+m+n) and SC is O(2m+m+n)
     }
 }
