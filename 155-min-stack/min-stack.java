@@ -1,9 +1,13 @@
 class MinStack {
-    int top;
-    int[] arr;
+    //METHOD 1:- USING ARRAY
+    /*
+    Methods pop, top and getMin operations will always be called on non-empty stacks. //Most IMP Line
+    At most 3 * 10^4 calls will be made to push, pop, top, and getMin.
+     */
+    int[] arr; int top;
     public MinStack() {
-        top=-1;
-        arr= new int[3*10000+1];
+        this.arr= new int[30000];
+        top= -1;
     }
 
     public void push(int val) {
@@ -20,7 +24,7 @@ class MinStack {
 
     public int getMin() {
         int min= arr[0];
-        for (int i=1; i<=top; i++) {
+        for (int i=1; i<=top; i++){
             if (arr[i]<min)
                 min= arr[i];
         }
