@@ -24,22 +24,45 @@ class Solution {
         return blocksOfWater;
          */
         //TC is O(3n) and SC is O(2n)
-        
+
         //OPTIMIZED BETTER METHOD:- USING SUFFIX MAX ARRAY
+        /*
         int n= height.length;
         int[] suffixMax= new int[n];
-        
+
         suffixMax[n-1]= height[n-1];
         for (int i=n-2; i>=0; i--){
             suffixMax[i]= Math.max(suffixMax[i+1],height[i]);
         }
-        
+
         int blocksOfWater= 0, prefixMax= 0;
         for (int i=0; i<n; i++){
             prefixMax= Math.max(prefixMax,height[i]);
             blocksOfWater+= Math.min(prefixMax,suffixMax[i])-height[i];
         }
         return blocksOfWater;
+         */
         //TC is O(2n) and SC is O(n)
+
+        //OPTIMAL METHOD:- USING TWO POINTERS
+        int leftMax= 0, rightMax= 0, blocksOfWater= 0;
+        int l= 0, r= height.length-1;
+
+        while (l<r){
+            if (height[l]<=height[r]){
+                if (height[l]>leftMax)
+                    leftMax= height[l];
+                blocksOfWater += leftMax-height[l];
+                l++;
+            }
+            else {
+                if (height[r]>rightMax)
+                    rightMax= height[r];
+                blocksOfWater+= rightMax-height[r];
+                r--;
+            }
+        }
+        return blocksOfWater;
+        //TC is O(n) and SC is O(1)
     }
 }
