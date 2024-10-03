@@ -1,18 +1,24 @@
 class Solution {
     public int[] arrayRankTransform(int[] arr) {
-        int n = arr.length,i=0;
-        TreeMap<Integer,Integer> map = new TreeMap<>();
-        for(i=0;i<n;i++){
-            map.put(arr[i],1);
+        //USING DIFFERENT DATA STRUCTURES
+        //Unique elements in sorted manner
+        SortedSet<Integer> set= new TreeSet<>();
+        for (int ele:arr){
+            set.add(ele);
         }
-        i=1;
-        for(Map.Entry<Integer,Integer> entry:map.entrySet()){
-            map.put(entry.getKey(),i);
-            i++;
+
+        //Element with their rank
+        HashMap<Integer,Integer> map= new HashMap<>();
+        int rank= 1;
+        for (int ele: set){
+            map.put(ele,rank);
+            rank++;
         }
-        for(i=0;i<n;i++){
-            arr[i] = map.get(arr[i]);
-        }
-        return arr;
+
+        int[] answer= new int[arr.length];
+        for (int i=0; i<answer.length; i++)
+            answer[i]= map.get(arr[i]);
+        return answer;
+        //TC is O(nlogn+2n) and SC is O(n+2n+n)
     }
 }
