@@ -8,11 +8,7 @@ class Solution {
                 stack.push(asteroid);
             else{ //asteroid is -ve and stack peek() maybe positive
                 while (true){
-                    if (stack.isEmpty()) {
-                        stack.push(asteroid); //Negative asteroid destroyed all the asteroids of the stack
-                        break;
-                    }
-                    if (stack.peek()<0) { //If -ve asteroid is there
+                    if (stack.isEmpty() || stack.peek()<0) { //If -ve asteroid is there
                         stack.push(asteroid);
                         break;
                     }
