@@ -13,10 +13,7 @@ class Solution {
                 else
                     map.put(c,map.get(c)-1);
                 
-                //Max Frequency can be reduced => Check again
-                maxFreq= 0;
-                for (int value: map.values()) //O(26) coz only 26 characters
-                    maxFreq= Math.max(maxFreq,value);
+                //WITHOUT DECREASING FREQUENCY
                 left++;
             }
             maxLen= Math.max(maxLen,right-left+1);
