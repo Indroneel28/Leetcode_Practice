@@ -1,5 +1,6 @@
 class Solution {
     public boolean canSortArray(int[] nums) {
+        //BUBBLE SORT
         for (int i=0; i<nums.length-1; i++){
             for (int j=0; j<nums.length-1-i; j++){
                 if (nums[j+1]<nums[j]){
@@ -9,13 +10,13 @@ class Solution {
                         nums[j+1]=temp;
                     }
                     else {
-                        System.out.println(i+" "+j);
                         return false;
                     }
                 }
             }
         }
         return true;
+        //TC is O(N^2*256) and SC is O(1)
     }
     private int countBits(int num){
         int count= 0;
