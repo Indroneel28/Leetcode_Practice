@@ -47,7 +47,6 @@ class Solution {
                 cr2++;
             j++;
         }
-        System.out.println(cl1+" "+cl2+" "+cr1+" "+cr2);
         return cl1==cl2 && cr1==cr2;
         //TC is O(m+n) and SC is O(1)
     }
