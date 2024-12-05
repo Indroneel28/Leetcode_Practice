@@ -1,19 +1,17 @@
 class Solution {
     public int climbStairs(int n) {
-        //THIS IS SAME LIKE FIB SERIES QUESTION BUT BASE CASES RE DIFFERENT
-        //BETTER METHOD:- MEMOIZATION (TOP-DOWN APPROACH)
+        //THIS IS SAME LIKE FIB SERIES QUESTION BUT BASE CASES ARE DIFFERENT
+        //OPTIMAL METHOD:- TABULATION (BOTTOM-UP APPROACH) WITH SPACE OPTIMIZATION
 
-        int[] dp= new int[n+1];
-        Arrays.fill(dp,-1);
-        return memoize(n,dp);
-        //TC is O(n) and SC is O(2n)
-    }
-
-    public int memoize(int n, int[] dp){
-        if (n<=2) //THIS IS ALSO GOOD
+        if (n<=3) //n<=2 is also okay
             return n;
-        if (dp[n]!=-1)
-            return dp[n]; //No need to calculate again
-        return dp[n]= memoize(n-1,dp)+memoize(n-2,dp);
+        int prev= 1, prev2= 1;
+        for (int i=2; i<=n; i++){
+            int sum= prev + prev2;
+            prev2= prev;
+            prev= sum;
+        }
+        return prev;
+        //TC is O(n) and SC is O(2n)
     }
 }
