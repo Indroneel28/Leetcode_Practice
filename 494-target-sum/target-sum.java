@@ -1,4 +1,5 @@
 class Solution {
+    //METHOD 1:- RECURSION
     public int findTargetSumWays(int[] nums, int target) {
         int[][] dp= new int[nums.length][1000+1];
         for (int[] row: dp)
@@ -11,8 +12,8 @@ class Solution {
         if (index==-1)
             return 0;
         int add= 0, subtract= 0;
-        add= nums[index] + recursion(nums,target,index-1,sum-nums[index]);
-        subtract= -nums[index] + recursion(nums,target,index-1, sum+nums[index]);
+        add= recursion(nums,target,index-1,sum-nums[index]);
+        subtract= recursion(nums,target,index-1, sum+nums[index]);
         return add + subtract;
     } 
 }
