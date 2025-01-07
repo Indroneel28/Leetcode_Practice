@@ -1,17 +1,14 @@
 class Solution {
     public List<String> stringMatching(String[] words) {
-        //METHOD 1:- BRUTE FORCE METHOD
+        //OPTIMAL METHOD
+        String str= String.join(" ",words);
         List<String> list= new ArrayList<>();
-        for (int i=0; i< words.length; i++){
-            for (int j=0; j<words.length; j++){
-                if (i!=j)
-                    if (words[j].contains(words[i])) {
-                        list.add(words[i]);
-                        break;
-                    }
-            }
+        for (int i=0; i<words.length; i++){
+            if (str.indexOf(words[i])!=str.lastIndexOf(words[i]))
+                list.add(words[i]);
         }
         return list;
-        //TC is O(n^3) and SC is O(n)
+        //TC is O(n^2) and SC is O(2n)
+        //indexOf() will traverse again
     }
 }
