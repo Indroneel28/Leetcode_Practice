@@ -1,16 +1,15 @@
 class Solution {
     //METHOD 1:- RECURSION
     public int findTargetSumWays(int[] nums, int target) {
-        return recursion(nums,target,nums.length-1,0);
+        return traverse(nums,target,nums.length-1);
     }
-    private int recursion(int[] nums, int target, int index, int sum){
-        if (target==sum && index==-1)
-            return 1;
+    //Helper Method
+    private int traverse(int[] nums, int target, int index){
         if (index==-1)
-            return 0;
-        int add= 0, subtract= 0;
-        add= recursion(nums,target,index-1,sum-nums[index]);
-        subtract= recursion(nums,target,index-1, sum+nums[index]);
-        return add + subtract;
-    } 
+            return target==0 ? 1 : 0;
+        int subtract= traverse(nums,target-nums[index],index-1);
+        int addition= traverse(nums,target+nums[index],index-1);
+        return addition + subtract;
+    }
+    //TC is O(2^n) and SC is O(n) due to stack space
 }
