@@ -3,10 +3,8 @@ class Solution {
         //OPTIMAL METHOD:- USING STACK
         Stack<Character> stack= new Stack<>();
         for (char c: s.toCharArray()){
-            if (Character.isDigit(c)){
-                if (Character.isLetter(stack.peek())) //If letter then remove it
-                    stack.pop();
-            }
+            if (Character.isDigit(c))
+                stack.pop();
             else
                 stack.push(c);
         }
