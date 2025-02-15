@@ -1,20 +1,13 @@
 class Solution {
-    //METHOD 5:- USING 4 VARIABLES
+    //METHOD 6:- GREEDY WORKS!!
+    //Logic:- Check adjacent days and if profit then add
     public int maxProfit(int[] prices) {
-        int currBuy, currNotBuy, aheadBuy, aheadNotBuy;
-        aheadBuy= aheadNotBuy= 0;
-        int n= prices.length;
-        for (int index= n-1; index>=0; index--){
-            //Buying
-            currBuy= Math.max(-prices[index]+aheadNotBuy,aheadBuy);
-            
-            //Selling (Not Buying)
-            currNotBuy= Math.max(prices[index]+aheadBuy,aheadNotBuy);
-            
-            aheadBuy= currBuy;
-            aheadNotBuy= currNotBuy;
+        int profit= 0;
+        for (int i=0; i<prices.length-1; i++){
+            if (prices[i]<prices[i+1])
+                profit += (prices[i+1]-prices[i]);
         }
-        return aheadBuy;
-        //TC is O(n) and SC is O(4)
+        return profit;
     }
+    //TC is O(n) and SC is O(1)
 }
