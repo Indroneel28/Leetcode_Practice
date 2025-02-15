@@ -1,23 +1,22 @@
 class Solution {
-    //METHOD 2:- MEMOIZATION (TOP-DOWN APPROACH)
+    //METHOD 3:- TABULATION (BOTTOM-UP APPROACH)
     public int maxProfit(int[] prices) {
-        int[][] dp= new int[prices.length][2];
-        for (int[] row: dp)
-            Arrays.fill(row,-1);
-        return memoize(prices,0,1,dp);
-    }
-    //Helper Method
-    private int memoize(int[] prices, int index, int buy, int[][] dp){
-        if (index==prices.length)
-            return 0;
-        if (dp[index][buy]!=-1)
-            return dp[index][buy];
-        if (buy==1){
-            return dp[index][buy]= Math.max( -prices[index] + memoize(prices,index+1,0,dp),memoize(prices,index+1,1,dp));  
+        int n= prices.length;
+        int[][] dp= new int[n+1][2];
+
+        //Base case
+        dp[n][0]= dp[n][1]= 0;
+        for (int index=n-1; index>=0; index--){
+            for (int buy=0; buy<=1; buy++){
+                if (buy==1){
+                    dp[index][buy]= Math.max(-prices[index]+dp[index+1][0],dp[index+1][1]);
+                }
+                else {
+                    dp[index][buy]= Math.max(prices[index]+dp[index+1][1],dp[index+1][0]);
+                }
+            }
         }
-        else {
-            return dp[index][buy]= Math.max(prices[index] + memoize(prices,index+1,1,dp),memoize(prices,index+1,0,dp));
-        }
+        return dp[0][1];
     }
-    //TC is O(n*2) and SC is O(n*2 + n)
+    //TC is O(n*2) and SC is O(n*2)
 }
