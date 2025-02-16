@@ -1,6 +1,6 @@
 class Solution {
-    //METHOD 2:- MEMOIZATION (TOP-DOWN APPROACH) [BY NEEL'S OWN]
-    //Using 3d array
+    //METHOD 3:- MEMOIZATION (TOP-DOWN APPROACH) [BY NEEL'S OWN]
+    //Using 3d array 
     public int maxProfit(int[] prices) {
         int[][][] dp= new int[prices.length][2][2];
         for (int[][] matrix: dp){
@@ -14,26 +14,16 @@ class Solution {
         //Base cases
         if (index==prices.length)
             return 0;
-        if (again==2)
+        if (again==2) //again can't exceed 2 //again can be 0 or 1
             return 0;
         if (dp[index][buy][again]!=-1)
             return dp[index][buy][again];
-        
+
         if (buy==1){
-            if (again==0){
-                return dp[index][buy][again]= Math.max(-prices[index] + memoize(prices,index+1,0,0,dp) , memoize(prices,index+1,1,0,dp));
-            }
-            else { //again==1
-                return dp[index][buy][again]= Math.max(-prices[index]+ memoize(prices,index+1,0,1,dp) , memoize(prices,index+1,1,1,dp));
-            }
+            return dp[index][buy][again]= Math.max(-prices[index] + memoize(prices,index+1,0,again,dp) , memoize(prices,index+1,1,again,dp));
         }
         else { //buy == 0
-            if (again==0){
-                return dp[index][buy][again]= Math.max(prices[index] + memoize(prices,index+1,1,1,dp) , memoize(prices,index+1,0,0,dp));
-            }
-            else { //again==1
-                return dp[index][buy][again]= Math.max(prices[index]+ memoize(prices,index+1,1,2,dp) , memoize(prices,index+1,0,1,dp));
-            }
+            return dp[index][buy][again]= Math.max(prices[index] + memoize(prices,index+1,1,again+1,dp) , memoize(prices,index+1,0,again,dp));
         }
     }
     //TC is O(n*2*2) and SC is O(n*2*2 + (n))
