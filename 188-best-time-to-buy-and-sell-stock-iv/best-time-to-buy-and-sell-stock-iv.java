@@ -1,17 +1,20 @@
 class Solution {
-    //METHOD 4:- TABULATION WITH 2d ARRAY
+    //METHOD 5:- SPACE OPTIMIZATION [OPTIMAL METHOD]
     public int maxProfit(int k, int[] prices) {
         int n= prices.length;
         int[][] dp= new int[n+1][k*2+1];
+        
+        int[] curr= new int[k*2+1], ahead= new int[k*2+1];
         for (int index= n-1; index>=0; index--){
             for (int transaction= 0; transaction<k*2; transaction++){
                 if (transaction%2==0) //Buy
-                    dp[index][transaction]= Math.max(-prices[index]+dp[index+1][transaction+1],dp[index+1][transaction]);
+                    curr[transaction]= Math.max(-prices[index]+ahead[transaction+1],ahead[transaction]);
                 else //Sell
-                    dp[index][transaction]= Math.max(prices[index]+dp[index+1][transaction+1],dp[index+1][transaction]);
+                    curr[transaction]= Math.max(prices[index]+ahead[transaction+1],ahead[transaction]);
             }
+            ahead= Arrays.copyOfRange(curr,0,2*k+1);
         }
-        return dp[0][0];
+        return ahead[0];
     }
-    //TC is O(n*k*2) and SC is O(n*k*2)
+    //TC is O(n*k*2) and SC is O(k*2)
 }
