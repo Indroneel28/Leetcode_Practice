@@ -1,22 +1,25 @@
 class Solution {
-    //METHOD 2:- TABULATION (BOTTOM-UP APPROACH)
-    //base case to top
+    //METHOD 3:- MEMOIZATION WITH 2 PARAMETERS
     public int maxProfit(int k, int[] prices) {
-        int n= prices.length;
-        int[][][] dp= new int[n+1][k+1][2];
-        for (int index= n-1; index>=0; index--){
-            for (int kk= 0; kk<k; kk++){
-                for (int buy= 1; buy>=0; buy--){
-                    if (buy==1){
-                        dp[index][kk][buy]= Math.max(-prices[index]+dp[index+1][kk][0],dp[index+1][kk][1]);
-                    }
-                    else {
-                        dp[index][kk][buy]= Math.max(prices[index]+dp[index+1][kk+1][1],dp[index+1][kk][0]);
-                    }
-                }
-            }
-        }
-        return dp[0][0][1];
+        int[][] dp= new int[prices.length][k*2+1];
+        for (int[] arr: dp)
+            Arrays.fill(arr,-1);
+        return memoize(prices,0,k*2,dp);
     }
-    //TC is O(n*k*2) and SC is O(n*k*2)
+    //Helper Method
+    private int memoize(int[] prices, int index, int transaction, int[][] dp){
+        //Base cases
+        if (index==prices.length || transaction==0)
+            return 0;
+        if (dp[index][transaction]!=-1)
+            return dp[index][transaction];
+
+        if(transaction%2==0){ //Buy
+            return dp[index][transaction]= Math.max(-prices[index]+memoize(prices,index+1,transaction-1,dp),memoize(prices,index+1,transaction,dp));
+        }
+        else{ //Not allowed to Buy => Sell
+            return dp[index][transaction]= Math.max(prices[index]+memoize(prices,index+1,transaction-1,dp),memoize(prices,index+1,transaction,dp));
+        }
+    }
+    //TC is O(n*2*k) and SC is O(n*2*k + n)
 }
