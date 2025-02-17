@@ -2,7 +2,6 @@ class Solution {
     //METHOD 5:- SPACE OPTIMIZATION [OPTIMAL METHOD]
     public int maxProfit(int k, int[] prices) {
         int n= prices.length;
-        int[][] dp= new int[n+1][k*2+1];
         
         int[] curr= new int[k*2+1], ahead= new int[k*2+1];
         for (int index= n-1; index>=0; index--){
