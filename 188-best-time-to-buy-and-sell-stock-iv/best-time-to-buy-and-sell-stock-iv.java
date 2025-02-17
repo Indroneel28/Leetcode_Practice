@@ -1,25 +1,17 @@
 class Solution {
-    //METHOD 3:- MEMOIZATION WITH 2 PARAMETERS
+    //METHOD 4:- TABULATION WITH 2d ARRAY
     public int maxProfit(int k, int[] prices) {
-        int[][] dp= new int[prices.length][k*2+1];
-        for (int[] arr: dp)
-            Arrays.fill(arr,-1);
-        return memoize(prices,0,k*2,dp);
-    }
-    //Helper Method
-    private int memoize(int[] prices, int index, int transaction, int[][] dp){
-        //Base cases
-        if (index==prices.length || transaction==0)
-            return 0;
-        if (dp[index][transaction]!=-1)
-            return dp[index][transaction];
-
-        if(transaction%2==0){ //Buy
-            return dp[index][transaction]= Math.max(-prices[index]+memoize(prices,index+1,transaction-1,dp),memoize(prices,index+1,transaction,dp));
+        int n= prices.length;
+        int[][] dp= new int[n+1][k*2+1];
+        for (int index= n-1; index>=0; index--){
+            for (int transaction= 0; transaction<k*2; transaction++){
+                if (transaction%2==0) //Buy
+                    dp[index][transaction]= Math.max(-prices[index]+dp[index+1][transaction+1],dp[index+1][transaction]);
+                else //Sell
+                    dp[index][transaction]= Math.max(prices[index]+dp[index+1][transaction+1],dp[index+1][transaction]);
+            }
         }
-        else{ //Not allowed to Buy => Sell
-            return dp[index][transaction]= Math.max(prices[index]+memoize(prices,index+1,transaction-1,dp),memoize(prices,index+1,transaction,dp));
-        }
+        return dp[0][0];
     }
-    //TC is O(n*2*k) and SC is O(n*2*k + n)
+    //TC is O(n*k*2) and SC is O(n*k*2)
 }
