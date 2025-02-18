@@ -1,20 +1,18 @@
 class Solution {
-    //METHOD 2:- TABULATION (BOTTOM-UP APPROACH)
+    //METHOD 3:- USING VARIABLES
     public int maxProfit(int[] prices) {
         int n= prices.length;
-        int[][] dp= new int[n+2][2]; //n+2 coz index+2 can be there
-
+        int currBuy= 0, currNotBuy= 0, frontBuy= 0, frontNotBuy= 0, front2Buy= 0, frontNot2Buy= 0;
         for (int index= n-1; index>=0; index--){
-            for (int buy=1; buy>=0; buy--){
-                if (buy==1){
-                    dp[index][buy]= Math.max(-prices[index]+dp[index+1][0],dp[index+1][1]);
-                }
-                else {
-                    dp[index][buy]= Math.max(prices[index]+dp[index+2][1],dp[index+1][0]);
-                }
-            }
+            currBuy= Math.max(-prices[index]+frontNotBuy,frontBuy);
+            currNotBuy= Math.max(prices[index]+front2Buy,frontNotBuy);
+            
+            frontNot2Buy= frontNotBuy;
+            front2Buy= frontBuy;
+            frontNotBuy= currNotBuy;
+            frontBuy= currBuy;
         }
-        return dp[0][1];
+        return currBuy;
     }
-    //TC is O(n*2) and SC is O(n*2)
+    //TC is O(n) and SC is O(4)
 }
