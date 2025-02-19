@@ -1,25 +1,22 @@
 class Solution {
-    //METHOD 2:- MEMOIZATION (TOP-DOWN APPROACH)
+    //METHOD 3:- TABULATION (BOTTOM-UP APPROACH)
     public int lengthOfLIS(int[] nums) {
-        int[][] dp= new int[nums.length][nums.length+1];
-        for (int[] row: dp)
-            Arrays.fill(row,-1);
-        return memoize(nums,0,-1,dp);
-    }
-    //Helper Method
-    private int memoize(int[] nums, int index, int prevIndex, int[][] dp){
-        if (index==nums.length)
-            return 0;
-        if (dp[index][prevIndex+1]!=-1)
-            return dp[index][prevIndex+1];
-        
-        //pick and not-pick
-        int pick= 0;
-        if (prevIndex==-1 || nums[index]>nums[prevIndex]){
-            pick= 1 + memoize(nums,index+1,index,dp);
+        int n= nums.length;
+        int[][] dp= new int[n+1][n+1];
+        for (int index=n-1; index>=0; index--){
+            //Shifting of indices for prevIndex
+            for (int prevIndex= index-1; prevIndex>=-1; prevIndex--){
+                //not-pick
+                int notPick= dp[index+1][prevIndex+1];
+                int pick= 0;
+                if (prevIndex==-1 || nums[index]>nums[prevIndex]){
+                    pick= 1 + dp[index+1][index+1];
+                }
+                dp[index][prevIndex+1]= Math.max(pick,notPick);
+            }
         }
-        int notPick= memoize(nums,index+1,prevIndex,dp);
-        return dp[index][prevIndex+1]= Math.max(pick,notPick);
+        //System.out.println(Arrays.deepToString(dp));
+        return dp[0][-1+1];
     }
-    //TC is O(n^2) and SC is O(n^2 + n)
+    //TC is O(n^2) and SC is O(n^2)
 }
