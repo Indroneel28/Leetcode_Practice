@@ -1,22 +1,18 @@
 class Solution {
-    //METHOD 4:- SPACE OPTIMIZATION
+    //METHOD 5:- ADVANCE TABULATION
     public int lengthOfLIS(int[] nums) {
-        int n= nums.length;
-        int[] curr= new int[n+1], ahead= new int[n+1];
-        for (int index=n-1; index>=0; index--){
-            //Shifting of indices for prevIndex
-            for (int prevIndex= index-1; prevIndex>=-1; prevIndex--){
-                //not-pick
-                int notPick= ahead[prevIndex+1];
-                int pick= 0;
-                if (prevIndex==-1 || nums[index]>nums[prevIndex]){
-                    pick= 1 + ahead[index+1];
+        int n= nums.length, maxi= 1;
+        int[] dp= new int[n];
+        Arrays.fill(dp,1);
+        for (int curr=0; curr<n; curr++){
+            for (int prev=0; prev<curr; prev++){
+                if (nums[prev]<nums[curr]){
+                    dp[curr]= Math.max(dp[curr],1+dp[prev]);
+                    maxi= Math.max(maxi,dp[curr]);
                 }
-                curr[prevIndex+1]= Math.max(pick,notPick);
             }
-            ahead= Arrays.copyOfRange(curr,0,n+2);
         }
-        return ahead[-1+1];
+        return maxi;
     }
-    //TC is O(n^2) and SC is O(2n)
+    //TC is O(n^2) and SC is O(n)
 }
