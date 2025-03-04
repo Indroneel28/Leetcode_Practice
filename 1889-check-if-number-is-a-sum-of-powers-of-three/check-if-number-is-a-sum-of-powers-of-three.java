@@ -8,5 +8,5 @@ class Solution {
         }
         return true;
     }
-    //TC is O(n) and SC is O(1)
+    //TC is O(log3n) and SC is O(1)
 }
