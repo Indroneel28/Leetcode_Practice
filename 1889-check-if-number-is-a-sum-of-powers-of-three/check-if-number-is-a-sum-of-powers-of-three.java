@@ -1,19 +1,12 @@
 class Solution {
-    //METHOD 1:- BRUTE FORCE METHOD
+    //METHOD 2:- USING TERNARY REPRESENTATION
     public boolean checkPowersOfThree(int n) {
-        int power= 0;
-        while (Math.pow(3,power)<=n){
-            power++;
-        }
-
-        power--;
-        while (n>0){
-            if (n>=Math.pow(3,power))
-                n= n-(int)Math.pow(3,power);
-            if (n>= Math.pow(3,power))
+        while (n!=0){
+            if (n%3==2)
                 return false;
-            power--;
+            n/=3;
         }
         return true;
     }
+    //TC is O(n) and SC is O(1)
 }
