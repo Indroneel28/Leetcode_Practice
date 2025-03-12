@@ -14,20 +14,24 @@
  * }
  */
 class Solution {
-    //InOrder Traversal means (Left Subtree -> Root Node --> Right Subtree)
-
-    //METHOD 1:- USING RECURSION
+    //METHOD 2:- ITERATIVE SOLUTION using Stack
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> list= new ArrayList<>();
-        inOrder(root,list);
-        return list;
-    }
-    private void inOrder(TreeNode node, List<Integer> list){
-        if (node!=null){
-            inOrder(node.left,list);
-            list.add(node.val);
-            inOrder(node.right,list);
+        if (root==null)
+            return list;
+        Stack<TreeNode> stack= new Stack<>();
+        TreeNode curr= root;
+
+        while (curr!=null || !stack.isEmpty()){
+            while (curr!=null){
+                stack.push(curr);
+                curr= curr.left;
+            }
+            curr= stack.pop();
+            list.add(curr.val);
+            curr= curr.right;
         }
+        return list;
     }
     //TC is O(n) and SC is O(n)
 }
