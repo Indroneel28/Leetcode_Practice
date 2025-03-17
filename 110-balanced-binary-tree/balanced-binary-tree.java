@@ -13,32 +13,26 @@
  *     }
  * }
  */
-
-public class Solution {
-    //METHOD 1:- USING BFS 
+class Solution {
+    //METHOD 2:- USING DFS
     public boolean isBalanced(TreeNode root) {
         if (root==null)
             return true;
-        //We will check maxDepth of left and right for each node
-        Queue<TreeNode> queue= new LinkedList<>();
-        queue.add(root);
-        while (!queue.isEmpty()){
-            TreeNode node= queue.poll();
-            if (node.left!=null)
-                queue.offer(node.left);
-            if (node.right!=null)
-                queue.offer(node.right);
-            int left= maxDepth(node.left), right= maxDepth(node.right);
-            if(Math.abs(left-right)>1)
-                return false;
-        }
-        return true;
+        int left= maxDepth(root.left);
+        int right= maxDepth(root.right);
+
+        if (Math.abs(left-right)>1)
+            return false;
+        
+        //Checking for other nodes
+        return isBalanced(root.left) && isBalanced(root.right);
     }
     private int maxDepth(TreeNode root){
-        if(root==null)
+        if (root==null)
             return 0;
         int left= 1 + maxDepth(root.left);
         int right= 1 + maxDepth(root.right);
-        return  Math.max(left,right);
+        return Math.max(left,right);
     }
+    //TC is O(n^2) and SC is O(2n)
 }
