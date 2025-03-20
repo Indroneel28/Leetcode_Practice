@@ -14,21 +14,20 @@
  * }
  */
 class Solution {
-    //METHOD 1:- USING DFS
+    //METHOD 2:- USING DFS(OPTIMIZED)
     public int diameterOfBinaryTree(TreeNode root) {
-        if (root==null)
-            return 0;
-        int l= maxDepth(root.left);
-        int r= maxDepth(root.right);
-
-        return Math.max(l+r, Math.max(diameterOfBinaryTree(root.left),diameterOfBinaryTree(root.right)));
+        int[] maxi= new int[1];
+        //maxi[0]= 0; //By default 0 in java
+        maxDepth(root,maxi);
+        return maxi[0];
     }
-    private int maxDepth(TreeNode node){
+    private int maxDepth(TreeNode node, int[] maxi){
         if (node==null)
             return 0;
-        int left= maxDepth(node.left);
-        int right= maxDepth(node.right);
-        return Math.max(left,right) + 1;
+        int l= maxDepth(node.left,maxi);
+        int r= maxDepth(node.right,maxi);
+        maxi[0]= Math.max(maxi[0],l+r);
+        return Math.max(l,r)+1;
     }
-    //TC is O(n^2) and SC is O(n)
+    //TC is O(n) and SC is O(n)
 }
