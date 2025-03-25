@@ -26,7 +26,7 @@ class Solution {
     //METHOD 1:- LEVEL ORDER TRAVERSAL
     public int widthOfBinaryTree(TreeNode root) {
         Queue<Pair> queue= new LinkedList<>();
-        queue.offer(new Pair(root,1));
+        queue.offer(new Pair(root,0));
 
         int width= 0;
         while (!queue.isEmpty()){
