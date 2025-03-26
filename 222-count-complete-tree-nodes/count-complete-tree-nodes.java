@@ -14,14 +14,15 @@
  * }
  */
 class Solution {
-    
+    //METHOD 1:- USING DFS TRAVERSAL
     public int count;
     public int countNodes(TreeNode root) {
         if (root==null)
-            return this.count;
-        this.count++;
+            return 0;
+        count++;
         countNodes(root.left);
         countNodes(root.right);
-        return this.count;
+        return count;
     }
+    //TC is O(n) and SC is O(n)
 }
