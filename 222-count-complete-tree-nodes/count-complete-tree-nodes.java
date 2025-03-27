@@ -14,15 +14,24 @@
  * }
  */
 class Solution {
-    //METHOD 1:- USING DFS TRAVERSAL
-    public int count;
+    //METHOD 3:- USING PBT property (OPTIMAL METHOD)
     public int countNodes(TreeNode root) {
+        int lh= findLeftHeight(root);
+        int rh= findRightHeight(root);
+        if (lh==rh)
+            return (1<<lh)-1; // i.e. Math.pow(2,lh)-1
+        else
+            return 1 + countNodes(root.left) + countNodes(root.right);
+    }
+    private int findLeftHeight(TreeNode root){
         if (root==null)
             return 0;
-        count++;
-        countNodes(root.left);
-        countNodes(root.right);
-        return count;
+        return 1 + findLeftHeight(root.left);
     }
-    //TC is O(n) and SC is O(n)
+    private int findRightHeight(TreeNode root){
+        if (root==null)
+            return 0;
+        return 1 + findRightHeight(root.right);
+    }
+    //TC is O((logn)^2) and SC is O(logn)
 }
