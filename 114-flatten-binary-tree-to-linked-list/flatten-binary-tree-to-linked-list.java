@@ -18,21 +18,24 @@ class Solution {
     public void flatten(TreeNode root) {
         if (root==null)
             return;
-        TreeNode ans= new TreeNode(-1);
-        TreeNode p= ans;
         Stack<TreeNode> stack= new Stack<>();
         stack.push(root);
 
+        TreeNode newNodes= new TreeNode(-1);
+        TreeNode p= newNodes;
         while (!stack.isEmpty()){
             TreeNode node= stack.pop();
-            p.right= new TreeNode(node.val);
+            p.left= null;
+            p.right= node;
             p= p.right;
-            if (node.right!=null)
+            if (node.right!=null){
                 stack.push(node.right);
-            if (node.left!=null)
+            }
+            if (node.left!=null){
                 stack.push(node.left);
+            }
         }
-        root.left= root.right= null;
-        root.right= ans.right.right;
+        root= newNodes.right;
     }
+    //TC is O(n) and SC is O(n)
 }
