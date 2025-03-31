@@ -14,28 +14,16 @@
  * }
  */
 class Solution {
-    //METHOD 1:- Iterative Pre-Order Traversal
+    //METHOD 2:- Recursion
+    TreeNode prev= null;
     public void flatten(TreeNode root) {
         if (root==null)
             return;
-        Stack<TreeNode> stack= new Stack<>();
-        stack.push(root);
-
-        TreeNode newNodes= new TreeNode(-1);
-        TreeNode p= newNodes;
-        while (!stack.isEmpty()){
-            TreeNode node= stack.pop();
-            p.left= null;
-            p.right= node;
-            p= p.right;
-            if (node.right!=null){
-                stack.push(node.right);
-            }
-            if (node.left!=null){
-                stack.push(node.left);
-            }
-        }
-        root= newNodes.right;
+        flatten(root.right);
+        flatten(root.left);
+        root.right= prev;
+        root.left= null;
+        prev= root;
     }
     //TC is O(n) and SC is O(n)
 }
