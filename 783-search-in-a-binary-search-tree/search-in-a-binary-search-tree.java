@@ -14,16 +14,18 @@
  * }
  */
 class Solution {
-    //METHOD 1:- RECURSION METHOD
+    //METHOD 2:- ITERATIVE METHOD
     public TreeNode searchBST(TreeNode root, int val) {
-        if (root==null)
-            return null;
-        else if (root.val==val)
-            return root;
-        else if (root.val<val)
-            return searchBST(root.right,val);
-        else 
-            return searchBST(root.left,val);
+        TreeNode p= root;
+        while (p!=null){
+            if (p.val==val)
+                return p;
+            else if (val < p.val)
+                p= p.left;
+            else 
+                p= p.right;
+        }
+        return p;
     }
-    //TC is O(logn) and SC is O(logn) coz of Stack space due to Recursion
+    //TC is O(logn) and SC is O(1)
 }
