@@ -9,14 +9,18 @@
  */
 
 class Solution {
-    //METHOD 2:- LCA of BST
+    //METHOD 3:- ITERATIVE VERSION OF (LCA OF BST)
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        if (p.val < root.val && q.val<root.val)
-            return lowestCommonAncestor(root.left,p,q);
-        else if (p.val > root.val && q.val > root.val)
-            return lowestCommonAncestor(root.right,p,q);
-        else
-            return root;
+        TreeNode node= root;
+        while (node!=null){
+            if (p.val<node.val && q.val<node.val)
+                node= node.left;
+            else if (p.val>node.val && q.val> node.val)
+                node= node.right;
+            else 
+                return node;
+        }
+        return null; //dummy statement
     }
-    //TC is O(logn) and SC is O(logn)
+    //TC is O(logn) and SC is O(1)
 }
