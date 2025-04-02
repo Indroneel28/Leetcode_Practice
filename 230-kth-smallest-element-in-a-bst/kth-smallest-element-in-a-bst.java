@@ -14,23 +14,23 @@
  * }
  */
 class Solution {
-    //METHOD 2:- Using Stack
+    //METHOD 3:- USING INORDER TRAVERSAL and Instance Variables
+    public int count, k, answer;
     public int kthSmallest(TreeNode root, int k) {
-        TreeNode curr= root;
-        Stack<TreeNode> stack= new Stack<>();
-        int count= 0;
-        while (!stack.isEmpty() || curr!=null){
-            while (curr!=null){
-                stack.push(curr);
-                curr= curr.left;
-            }
-            curr= stack.pop();
-            count++;
-            if(count==k)
-                return curr.val;
-            curr= curr.right;
-        }
-        return -1;
+        this.count= 0;
+        this.k= k;
+        this.answer= -1;
+        traverse(root);
+        return answer;
     }
-    //TC is O(n) and SC is O(n) in worst case
+    private void traverse(TreeNode root){
+        if (root==null)
+            return;
+        traverse(root.left);
+        count++;
+        if (count==k)
+            answer= root.val;
+        traverse(root.right);
+    }
+    //TC is O(k) and SC is nearly O(n)
 }
