@@ -14,7 +14,7 @@
  * }
  */
 class Solution {
-    //METHOD 1:- USING STACK
+    //METHOD 1:- USING PRIORITY QUEUE
     public int count= 0;
     public int kthSmallest(TreeNode root, int k) {
         PriorityQueue<Integer> pq= new PriorityQueue<>();
@@ -35,5 +35,5 @@ class Solution {
         }
         return ans;
     }
-    //TC is O(2logn) and SC is O(logn)
+    //TC is O(nlogn + k) and SC is O(2n)
 }
