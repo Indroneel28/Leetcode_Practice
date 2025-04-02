@@ -14,26 +14,23 @@
  * }
  */
 class Solution {
-    //METHOD 1:- USING PRIORITY QUEUE
-    public int count= 0;
+    //METHOD 2:- Using Stack
     public int kthSmallest(TreeNode root, int k) {
-        PriorityQueue<Integer> pq= new PriorityQueue<>();
-        Queue<TreeNode> queue= new LinkedList<>();
-        queue.add(root);
-        while (!queue.isEmpty()){
-            TreeNode node= queue.poll();
-            pq.offer(node.val);
-            if (node.left!=null)
-                queue.offer(node.left);
-            if (node.right!=null)
-                queue.offer(node.right);
+        TreeNode curr= root;
+        Stack<TreeNode> stack= new Stack<>();
+        int count= 0;
+        while (!stack.isEmpty() || curr!=null){
+            while (curr!=null){
+                stack.push(curr);
+                curr= curr.left;
+            }
+            curr= stack.pop();
+            count++;
+            if(count==k)
+                return curr.val;
+            curr= curr.right;
         }
-        int c= 0, ans= -1;
-        while (c<k) {
-            ans = pq.poll();
-            c++;
-        }
-        return ans;
+        return -1;
     }
-    //TC is O(nlogn + k) and SC is O(2n)
+    //TC is O(n) and SC is O(n) in worst case
 }
