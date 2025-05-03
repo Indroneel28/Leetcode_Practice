@@ -9,25 +9,18 @@
  */
 
 class Solution {
-    //METHOD 1:- LCA of Binary Tree
+    //METHOD 3:- ITERATIVE METHOD
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        return traverse(root,p,q);
+        TreeNode node= root;
+        while (node!=null){
+            if (node.val<p.val && node.val<q.val)
+                node= node.right;
+            else if (node.val>p.val && node.val>q.val) 
+                node= node.left;
+            else 
+                return node;
+        }
+        return node;
     }
-    private TreeNode traverse(TreeNode root, TreeNode p, TreeNode q){
-        if (root==null)
-            return null;
-        TreeNode left= traverse(root.left,p,q);
-        TreeNode right= traverse(root.right,p,q);
-        if (left!=null && right!=null)
-            return root;
-        else if (root==p || root==q)
-            return root;
-        else if (left!=null)
-            return left;
-        else if (right!=null)
-            return right;
-        else 
-            return null;
-    }
-    //TC is O(n) and SC is O(n)
+    //TC is O(logn) and SC is O(1)
 }
