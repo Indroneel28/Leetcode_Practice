@@ -14,35 +14,17 @@
  * }
  */
 class Solution {
-    //METHOD 1:- Brute Force Method
+    //METHOD 2:- Optimal Method
     public TreeNode bstFromPreorder(int[] preorder) {
-        TreeNode root= new TreeNode(preorder[0]);
-        for (int i=1; i<preorder.length; i++){
-            insertNode(root,preorder[i]);;
-        }
+        return bstFromPreorder(preorder,Integer.MAX_VALUE, new int[1]);
+    }
+    public TreeNode bstFromPreorder(int[] preorder, int upperBound, int[] i){
+        if (i[0]==preorder.length || preorder[i[0]]>=upperBound)
+            return null;
+        TreeNode root= new TreeNode(preorder[i[0]++]);
+        root.left= bstFromPreorder(preorder,root.val,i);
+        root.right= bstFromPreorder(preorder,upperBound,i);
         return root;
     }
-    private void insertNode(TreeNode root, int value){
-        TreeNode node= new TreeNode(value);
-        TreeNode temp= root;
-        while (temp!=null){
-            if (temp.val>value){
-                if (temp.left==null){
-                    temp.left= node;
-                    return;
-                }
-                else 
-                    temp = temp.left;
-            }
-            else{
-                if (temp.right==null){
-                    temp.right= node;
-                    return;
-                }
-                else 
-                    temp = temp.right;
-            }
-        }
-    }
-    //TC is O(n^2) and SC is O(1)
+    //TC is O(3n) and SC is O(n)
 }
