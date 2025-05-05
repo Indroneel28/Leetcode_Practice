@@ -13,32 +13,33 @@
  *     }
  * }
  */
-
-//METHOD 1:- InOrder Traversal
+ 
+//METHOD 2:- USING STACK
 class BSTIterator {
-    List<TreeNode> list;
-    int pointer;
+
+    Stack<TreeNode> stack;
     public BSTIterator(TreeNode root) {
-        this.list= new ArrayList<>();
-        this.pointer= 0;
-        inOrder(this.list,root);
-    } //TC is O(n) during constructor calling
-    private void inOrder(List<TreeNode> list, TreeNode root){
-        if (root==null)
-            return;
-        inOrder(list,root.left);
-        list.add(root);
-        inOrder(list,root.right);
+        this.stack= new Stack<>();
+        insertNode(root,stack);
+    }
+    private void insertNode(TreeNode node, Stack<TreeNode> stack){
+        while (node!=null){
+            stack.add(node);
+            node= node.left;
+        }
     }
 
     public int next() {
-        return list.get(this.pointer++).val;
-    } //TC is O(1)
+        TreeNode node= this.stack.pop();
+        insertNode(node.right,stack);
+        return node.val;
+    }
 
     public boolean hasNext() {
-        return this.pointer < list.size();
-    } //TC is O(1)
+        return !stack.isEmpty();
+    }
 }
+//TC is Amortized O(1) and SC is O(height of tree) for Stack
 
 /**
  * Your BSTIterator object will be instantiated and called as such:
