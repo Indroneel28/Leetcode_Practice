@@ -13,30 +13,30 @@
  *     }
  * }
  */
- 
+
 //METHOD 2:- USING STACK
 class BSTIterator {
 
     Stack<TreeNode> stack;
     public BSTIterator(TreeNode root) {
         this.stack= new Stack<>();
-        insertNode(root,stack);
+        insertNode(root);
     }
-    private void insertNode(TreeNode node, Stack<TreeNode> stack){
+    private void insertNode(TreeNode node){
         while (node!=null){
-            stack.add(node);
+            this.stack.add(node);
             node= node.left;
         }
     }
 
     public int next() {
         TreeNode node= this.stack.pop();
-        insertNode(node.right,stack);
+        insertNode(node.right);
         return node.val;
     }
 
     public boolean hasNext() {
-        return !stack.isEmpty();
+        return !this.stack.isEmpty();
     }
 }
 //TC is Amortized O(1) and SC is O(height of tree) for Stack
